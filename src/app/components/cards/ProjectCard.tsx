@@ -13,7 +13,39 @@ interface ProjectCardProps {
 export default function ProjectCard({ data }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const cardElementRef = useRef<HTMLDivElement>(null);
   const { activeTrigger } = useHoverTrigger();
+  const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Intersection Observer for mobile
+  useEffect(() => {
+    if (!isMobile || !cardElementRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.6, // Trigger when 60% of card is visible (more centered)
+        rootMargin: '-30% 0px', // Only trigger in middle 40% of viewport
+      }
+    );
+
+    observer.observe(cardElementRef.current);
+
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   // Check if this card should be triggered
   const isTriggered =
@@ -22,7 +54,7 @@ export default function ProjectCard({ data }: ProjectCardProps) {
 
   useEffect(() => {
     if (imageRef.current) {
-      const shouldAnimate = isHovered || isTriggered;
+      const shouldAnimate = isHovered || isTriggered || (isMobile && isInView);
 
       if (shouldAnimate) {
         // Zoom, tilt, and raise effect on hover or trigger
@@ -44,7 +76,7 @@ export default function ProjectCard({ data }: ProjectCardProps) {
         });
       }
     }
-  }, [isHovered, isTriggered]);
+  }, [isHovered, isTriggered, isMobile, isInView]);
 
   return (
     <BaseCard
@@ -56,6 +88,7 @@ export default function ProjectCard({ data }: ProjectCardProps) {
       disableHoverFloat={true}
     >
       <div
+        ref={cardElementRef}
         className="w-full h-full p-6 flex flex-col justify-between"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

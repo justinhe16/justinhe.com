@@ -14,7 +14,69 @@ export default function HobbyCard({ data }: HobbyCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const mediaRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardElementRef = useRef<HTMLDivElement>(null);
   const { activeTrigger } = useHoverTrigger();
+  const [isInView, setIsInView] = useState(false);
+  const [isVideoInView, setIsVideoInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Intersection Observer for mobile animations (strict - for center focus)
+  useEffect(() => {
+    if (!isMobile || !cardElementRef.current) return;
+
+    // Special handling for last card (dyno) - less sensitive
+    const isLastCard = data.id.includes('dyno') || data.id.includes('rock-climbing');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      isLastCard
+        ? {
+            threshold: 0.3, // Looser for last card
+            rootMargin: '-15% 0px', // Less strict margin
+          }
+        : {
+            threshold: 0.6, // Trigger when 60% of card is visible (more centered)
+            rootMargin: '-30% 0px', // Only trigger in middle 40% of viewport
+          }
+    );
+
+    observer.observe(cardElementRef.current);
+
+    return () => observer.disconnect();
+  }, [isMobile, data.id]);
+
+  // Separate Intersection Observer for video playback (lenient - plays easier)
+  useEffect(() => {
+    if (!isMobile || !cardElementRef.current || !data.videoUrl) return;
+
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVideoInView(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.3, // Play when 30% visible
+        rootMargin: '-10% 0px', // Looser margin
+      }
+    );
+
+    videoObserver.observe(cardElementRef.current);
+
+    return () => videoObserver.disconnect();
+  }, [isMobile, data.videoUrl]);
 
   // Check if this card should be triggered
   const isTriggered =
@@ -23,12 +85,14 @@ export default function HobbyCard({ data }: HobbyCardProps) {
     (activeTrigger === 'surfing' && (data.id.includes('surfing') || data.id.includes('mentawai'))) ||
     (activeTrigger === 'rock-climbing' && data.id.includes('rock-climbing'));
 
-  const shouldAnimate = isHovered || isTriggered;
+  const shouldAnimate = isHovered || isTriggered || (isMobile && isInView);
 
   // Handle video playback
   useEffect(() => {
     if (videoRef.current) {
-      if (shouldAnimate) {
+      const shouldPlayVideo = isHovered || isTriggered || (isMobile && isVideoInView);
+
+      if (shouldPlayVideo) {
         videoRef.current.play().catch(() => {
           // Ignore play errors
         });
@@ -37,7 +101,7 @@ export default function HobbyCard({ data }: HobbyCardProps) {
         videoRef.current.currentTime = 0;
       }
     }
-  }, [shouldAnimate]);
+  }, [isHovered, isTriggered, isMobile, isVideoInView]);
 
   // Handle dropdown animation
   useEffect(() => {
@@ -70,6 +134,7 @@ export default function HobbyCard({ data }: HobbyCardProps) {
       disableHoverFloat={true}
     >
       <div
+        ref={cardElementRef}
         className="w-full h-full relative overflow-hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -88,7 +153,7 @@ export default function HobbyCard({ data }: HobbyCardProps) {
             <video
               ref={videoRef}
               src={data.videoUrl}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover scale-135 lg:scale-100"
               loop
               muted
               playsInline

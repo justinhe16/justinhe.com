@@ -1,21 +1,25 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { animate, stagger, splitText } from 'animejs';
 import Signature, { SignatureRef } from './components/Signature';
 import EmailSignup from './components/EmailSignup';
 import CardGrid from './components/CardGrid';
 import TriggerWord from './components/TriggerWord';
+import Header from './components/Header';
 import { useTheme } from '@/hooks/useTheme';
 import { homePageCards } from '@/data/homePageCards';
 import { HoverTriggerProvider, useHoverTrigger } from '@/contexts/HoverTriggerContext';
 
 function HomeContent() {
+  const router = useRouter();
   const signatureRef = useRef<HTMLDivElement>(null);
   const signatureComponentRef = useRef<SignatureRef>(null);
   const splitContentRef = useRef<HTMLDivElement>(null);
   const leftContentRef = useRef<HTMLDivElement>(null);
   const rightContentRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const [showContent, setShowContent] = useState(false);
   const [showUnderlines, setShowUnderlines] = useState(false);
   const { switchTheme } = useTheme();
@@ -27,31 +31,45 @@ function HomeContent() {
   const handleDrawingComplete = () => {
     // Wait after drawing completes, then slide
     setTimeout(() => {
-      // Slide signature to left
+      // Slide signature to left (different positions for mobile vs desktop)
+      const isMobile = window.innerWidth < 1024;
+
       if (signatureRef.current) {
-        animate(signatureRef.current, {
-          translateX: [0, 'calc(-7vw)'],
-          translateY: [0, 'calc(25vh)'],
-          scale: [1, 0.5],
-          duration: 800,
-          easing: 'out(3)',
-        });
+        if (isMobile) {
+          // On mobile, fade out the signature after drawing
+          animate(signatureRef.current, {
+            opacity: [1, 0],
+            duration: 800,
+            easing: 'out(3)',
+          });
+        } else {
+          // On desktop, slide to left column position
+          animate(signatureRef.current, {
+            translateX: [0, 'calc(-7vw)'],
+            translateY: [0, 'calc(25vh)'],
+            scale: [1, 0.5],
+            duration: 800,
+            easing: 'out(3)',
+          });
+        }
       }
 
-      // Fade in split content DURING the slide (starts 300ms into slide)
+      // Fade in split content DURING the slide (starts 300ms into slide on desktop)
       if (splitContentRef.current) {
         animate(splitContentRef.current, {
           opacity: [0, 1],
           duration: 600,
-          delay: 300,
+          delay: isMobile ? 800 : 300, // Wait for signature fade on mobile
           easing: 'out(2)',
         });
       }
 
       // Show and animate content elements
+      // Mobile: wait for signature to fully fade (800ms) + small gap
+      // Desktop: start during slide (400ms)
       setTimeout(() => {
         setShowContent(true);
-      }, 400);
+      }, isMobile ? 900 : 400);
     }, 2000); // 2 second pause after drawing completes
   };
 
@@ -71,6 +89,16 @@ function HomeContent() {
   useEffect(() => {
     // Animate content elements with stagger when they appear
     if (showContent) {
+      // Fade in mobile header first
+      if (headerRef.current) {
+        animate(headerRef.current, {
+          opacity: [0, 1],
+          translateY: [-20, 0],
+          duration: 400,
+          easing: 'out(2)',
+        });
+      }
+
       // First fade in the container
       const leftElements = leftContentRef.current?.querySelectorAll('.fade-in-item');
 
@@ -122,16 +150,10 @@ function HomeContent() {
 
   // Auto-scroll to first triggered card when hovering trigger words
   useEffect(() => {
-    console.log('🔍 Auto-scroll effect triggered, activeTrigger:', activeTrigger);
-
-    if (!activeTrigger || !rightContentRef.current) {
-      console.log('❌ No trigger or ref');
-      return;
-    }
+    if (!activeTrigger || !rightContentRef.current) return;
 
     // Find all cards in the right column
     const cards = rightContentRef.current.querySelectorAll('.spotlight-card');
-    console.log('📦 Found cards:', cards.length);
 
     // Find the first triggered card based on activeTrigger
     let firstTriggeredCard: Element | null = null;
@@ -140,7 +162,6 @@ function HomeContent() {
       const cardElement = card as HTMLElement;
       const cardId = cardElement.dataset?.cardId;
       const category = cardElement.dataset?.category;
-      console.log('🃏 Card ID:', cardId, 'Category:', category);
 
       if (!cardId) return;
 
@@ -153,34 +174,35 @@ function HomeContent() {
         (activeTrigger === 'rock-climbing' && cardId.includes('rock-climbing')) ||
         (activeTrigger === 'write' && category === 'blog');
 
-      console.log(`  Card ${cardId} shouldScroll:`, shouldScroll);
-
       if (shouldScroll && !firstTriggeredCard) {
         firstTriggeredCard = card;
-        console.log('✅ First triggered card found:', cardId);
       }
     });
 
     // Scroll to the first triggered card
     if (firstTriggeredCard) {
-      console.log('📜 Scrolling to card');
       const cardRect = firstTriggeredCard.getBoundingClientRect();
 
       // Calculate scroll position relative to the page
       const scrollTop = window.scrollY + cardRect.top - 150;
-      console.log('📍 Scroll position:', scrollTop);
 
       window.scrollTo({
         top: scrollTop,
         behavior: 'smooth',
       });
-    } else {
-      console.log('❌ No triggered card found');
     }
   }, [activeTrigger]);
 
   return (
     <>
+      {/* Header - Mobile only, fades in with content */}
+      <div ref={headerRef} className="lg:hidden opacity-0">
+        <Header
+          onCategoryClick={(category) => router.push(`/${category}`)}
+          onHomeClick={() => router.push('/')}
+        />
+      </div>
+
       {/* Main Container */}
       <div className="min-h-screen relative">
         {/* Signature - starts centered on full page */}
@@ -205,7 +227,7 @@ function HomeContent() {
               className="grid grid-cols-1 lg:grid-cols-2"
             >
           {/* Left Column - Sticky on desktop, static on mobile */}
-          <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-12 lg:pt-24">
+          <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-4 lg:pt-24">
             <div
               ref={leftContentRef}
               className="flex flex-col justify-start px-8 lg:px-12 py-8 lg:py-12 space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/0 h-auto lg:h-[750px] transition-opacity duration-300"
@@ -237,7 +259,7 @@ function HomeContent() {
           </div>
 
           {/* Right Column - Scrollable Card Grid with padding */}
-          <div ref={rightContentRef} className="min-h-screen py-12 lg:py-24 px-6 lg:px-8">
+          <div ref={rightContentRef} className="min-h-screen py-6 lg:py-24 px-0 lg:px-8">
             {showContent && (
               <div className="fade-in-item opacity-0 w-full">
                 <CardGrid cards={homePageCards} />

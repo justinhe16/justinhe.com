@@ -2,6 +2,7 @@
 
 import { useHoverTrigger } from '@/contexts/HoverTriggerContext';
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 interface TriggerWordProps {
   trigger: 'building' | 'dori' | 'travel' | 'foraging-frames' | 'surfing' | 'rock-climbing' | 'write';
@@ -12,6 +13,14 @@ interface TriggerWordProps {
 export default function TriggerWord({ trigger, children, showUnderline = true }: TriggerWordProps) {
   const { setActiveTrigger } = useHoverTrigger();
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Tailwind color references (rgb values for SVG):
   // blue-500: rgb(59, 130, 246) -> %233b82f6
@@ -105,15 +114,27 @@ export default function TriggerWord({ trigger, children, showUnderline = true }:
   const underlineStyle = getUnderlineStyle();
   const link = getLink();
 
-  const handleClick = () => {
-    router.push(link);
+  const handleClick = (e: React.MouseEvent) => {
+    if (isMobile) {
+      // On mobile, prevent navigation and trigger scroll behavior
+      e.preventDefault();
+      setActiveTrigger(trigger);
+
+      // Clear trigger after a delay
+      setTimeout(() => {
+        setActiveTrigger(null);
+      }, 2000);
+    } else {
+      // On desktop, navigate normally
+      router.push(link);
+    }
   };
 
   return (
     <span
       className="font-semibold cursor-pointer inline-block relative transition-transform duration-300 hover:-translate-y-1"
-      onMouseEnter={() => setActiveTrigger(trigger)}
-      onMouseLeave={() => setActiveTrigger(null)}
+      onMouseEnter={() => !isMobile && setActiveTrigger(trigger)}
+      onMouseLeave={() => !isMobile && setActiveTrigger(null)}
       onClick={handleClick}
     >
       {children}

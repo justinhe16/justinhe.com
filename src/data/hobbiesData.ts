@@ -6,7 +6,7 @@ export const hobbiesData: HobbyCardData[] = [
     category: 'hobby',
     width: '2x',
     height: '1x',
-    activity: 'Water angle from surfing "The Hole", Mentawais, Indonesia c. 2025',
+    activity: 'Surfing "The Hole", Mentawais, Indonesia c. 2025',
     imageUrl: '/mentawai-surfing.jpg',
   },
   {

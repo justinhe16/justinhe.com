@@ -29,6 +29,45 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
   const lastMousePosition = useRef({ x: 0, y: 0 });
   const [isTriggered, setIsTriggered] = useState(false);
   const randomTiltRef = useRef({ rotateX: 0, rotateY: 0 });
+  const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Intersection Observer for mobile scroll-into-view animations
+  useEffect(() => {
+    if (!isMobile || !cardRef.current) return;
+
+    // Special handling for last card (dyno) - less sensitive
+    const isLastCard = cardId.includes('dyno') || cardId.includes('rock-climbing');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsInView(entry.isIntersecting);
+        });
+      },
+      isLastCard
+        ? {
+            threshold: 0.3, // Looser for last card
+            rootMargin: '-15% 0px', // Less strict margin
+          }
+        : {
+            threshold: 0.6, // Trigger when 60% of card is visible (more centered)
+            rootMargin: '-30% 0px', // Only trigger in middle 40% of viewport
+          }
+    );
+
+    observer.observe(cardRef.current);
+
+    return () => observer.disconnect();
+  }, [isMobile, cardId]);
 
   // A card is NOT dimmed if:
   // 1. No focus is active (nothing hovered, no trigger)
@@ -48,7 +87,7 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
   })();
 
   const widthClass = width === '2x' ? 'col-span-1 lg:col-span-2' : 'col-span-1';
-  const heightClass = height === '2x' ? 'row-span-1 lg:row-span-2' : 'row-span-1';
+  const heightClass = height === '2x' ? 'row-span-2' : 'row-span-1';
   const hoverClass = disableHoverFloat ? '' : 'hover:scale-[1.01]';
 
   // Get category-specific gradient for glassmorphism
@@ -65,10 +104,10 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
     }
   };
 
-  // Expanding wave effect on hover or trigger
+  // Expanding wave effect on hover, trigger, or mobile scroll into view
   useEffect(() => {
     if (blobRef.current) {
-      const shouldAnimate = isHovered || isTriggered;
+      const shouldAnimate = isHovered || isTriggered || (isMobile && isInView);
 
       if (shouldAnimate) {
         // Wave expands to fill the card (slower and much larger)
@@ -90,7 +129,7 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
         });
       }
     }
-  }, [isHovered, isTriggered]);
+  }, [isHovered, isTriggered, isMobile, isInView]);
 
   // Check if this card should be triggered by the active trigger
   useEffect(() => {
