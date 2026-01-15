@@ -90,7 +90,7 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
   const heightClass = height === '2x' ? 'row-span-2' : 'row-span-1';
   const hoverClass = disableHoverFloat ? '' : 'hover:scale-[1.01]';
 
-  // Get category-specific gradient for glassmorphism
+  // Get category-specific gradient for glassmorphism (hover/active)
   const getGlassGradient = () => {
     switch (category) {
       case 'blog':
@@ -101,6 +101,20 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
         return 'linear-gradient(135deg, var(--card-hobby-light) 0%, var(--card-hobby-mid) 50%, var(--card-hobby-light) 100%)';
       default:
         return 'linear-gradient(135deg, var(--card-default-light) 0%, var(--card-default-mid) 50%, var(--card-default-light) 100%)';
+    }
+  };
+
+  // Get category-specific default gradient (subtle)
+  const getDefaultGradient = () => {
+    switch (category) {
+      case 'blog':
+        return 'linear-gradient(135deg, var(--card-blog-default-light) 0%, var(--card-blog-default-mid) 50%, var(--card-blog-default-light) 100%)';
+      case 'project':
+        return 'linear-gradient(135deg, var(--card-project-default-light) 0%, var(--card-project-default-mid) 50%, var(--card-project-default-light) 100%)';
+      case 'hobby':
+        return 'linear-gradient(135deg, var(--card-hobby-default-light) 0%, var(--card-hobby-default-mid) 50%, var(--card-hobby-default-light) 100%)';
+      default:
+        return 'linear-gradient(135deg, var(--card-glass-light) 0%, var(--card-glass-mid) 50%, var(--card-glass-light) 100%)';
     }
   };
 
@@ -319,7 +333,7 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
         ref={innerCardRef}
         className="cursor-pointer relative backdrop-blur-xl rounded-lg overflow-hidden w-full h-full group-hover:backdrop-blur-[20px] transition-opacity duration-300"
         style={{
-          background: 'linear-gradient(135deg, var(--card-glass-light) 0%, var(--card-glass-mid) 50%, var(--card-glass-light) 100%)',
+          background: getDefaultGradient(),
           opacity: isDimmed ? 0.3 : 1,
         }}
         onClick={handleClick}

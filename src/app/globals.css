@@ -59,7 +59,7 @@
   --theme-blog-bg-2: #fff9c4;
   --theme-blog-signature: #F57F17;
 
-  /* Category Card Colors */
+  /* Category Card Colors - Hover/Active */
   --card-blog-light: rgba(255, 207, 0, 0.7);
   --card-blog-mid: rgba(255, 207, 0, 0.5);
   --card-project-light: rgba(45, 175, 255, 0.7);
@@ -68,6 +68,14 @@
   --card-hobby-mid: rgba(238, 97, 35, 0.5);
   --card-default-light: rgba(156, 163, 175, 0.3);
   --card-default-mid: rgba(107, 114, 128, 0.15);
+
+  /* Category Card Colors - Default/Subtle */
+  --card-blog-default-light: rgba(255, 207, 0, 0.15);
+  --card-blog-default-mid: rgba(255, 207, 0, 0.1);
+  --card-project-default-light: rgba(45, 175, 255, 0.15);
+  --card-project-default-mid: rgba(45, 175, 255, 0.1);
+  --card-hobby-default-light: rgba(238, 97, 35, 0.15);
+  --card-hobby-default-mid: rgba(238, 97, 35, 0.1);
 
   /* Glassmorphism Card Background */
   --card-glass-light: rgba(0, 0, 0, 0.1);
