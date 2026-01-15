@@ -117,7 +117,11 @@ function BlogContent() {
 
   return (
     <>
-      <div ref={headerRef} className={`fixed top-0 left-0 right-0 z-50 ${isFirstLoad ? 'opacity-0' : ''}`}>
+      <div
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-50 ${isFirstLoad ? 'opacity-0' : ''}`}
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}
+      >
         <Header
           activeCategory="blog"
           onHomeClick={handleHomeClick}
