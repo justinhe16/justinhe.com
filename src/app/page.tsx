@@ -196,7 +196,7 @@ function HomeContent() {
   return (
     <>
       {/* Header - Mobile only, fades in with content */}
-      <div ref={headerRef} className="lg:hidden opacity-0">
+      <div ref={headerRef} className="lg:hidden fixed top-0 left-0 right-0 z-50 opacity-0">
         <Header
           onCategoryClick={(category) => router.push(`/${category}`)}
           onHomeClick={() => router.push('/')}
@@ -227,7 +227,7 @@ function HomeContent() {
               className="grid grid-cols-1 lg:grid-cols-2"
             >
           {/* Left Column - Sticky on desktop, static on mobile */}
-          <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-4 lg:pt-24">
+          <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-16 lg:pt-24">
             <div
               ref={leftContentRef}
               className="flex flex-col justify-start px-8 lg:px-12 py-8 lg:py-12 space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/0 h-auto lg:h-[750px] transition-opacity duration-300"
