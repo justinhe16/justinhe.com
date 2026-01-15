@@ -95,16 +95,6 @@ function HomeContent() {
           opacity: [0, 1],
           duration: 400,
           easing: 'out(2)',
-          complete: () => {
-            // Force a reflow to fix backdrop-filter rendering on mobile
-            if (headerRef.current && window.innerWidth < 1024) {
-              const header = headerRef.current;
-              // Trigger recomposition by temporarily modifying a property
-              header.style.transform = 'translateZ(0)';
-              // Force browser to recalculate
-              void header.offsetHeight;
-            }
-          },
         });
       }
 
