@@ -93,7 +93,6 @@ function HomeContent() {
       if (headerRef.current) {
         animate(headerRef.current, {
           opacity: [0, 1],
-          translateY: [-20, 0],
           duration: 400,
           easing: 'out(2)',
         });
