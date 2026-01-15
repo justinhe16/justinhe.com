@@ -1,0 +1,88 @@
+'use client';
+
+import { Github, Linkedin, FileText } from 'lucide-react';
+
+interface HeaderProps {
+  activeCategory?: string;
+  onCategoryClick: (category: string) => void;
+  onHomeClick: () => void;
+}
+
+export default function Header({ activeCategory, onCategoryClick, onHomeClick }: HeaderProps) {
+  const categories = [
+    { id: 'projects', label: 'Projects' },
+    { id: 'hobbies', label: 'Hobbies' },
+    { id: 'blog', label: 'Blog' },
+  ];
+
+  const getThemeClass = (categoryId: string) => {
+    switch (categoryId) {
+      case 'projects': return 'text-blue-600 bg-blue-50';
+      case 'hobbies': return 'text-red-600 bg-red-50';
+      case 'blog': return 'text-yellow-700 bg-yellow-50';
+      default: return '';
+    }
+  };
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 px-8 lg:px-16 py-3 lg:py-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="w-full rounded-full shadow-lg bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-between px-4 lg:px-8 py-2 lg:py-3">
+        {/* Left side - Navigation */}
+        <nav className="flex items-center gap-2 lg:gap-4">
+          <button
+            onClick={onHomeClick}
+            className="font-sans text-xs lg:text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+          >
+            Home
+          </button>
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => onCategoryClick(cat.id)}
+              className={`font-sans text-xs lg:text-sm font-medium transition-all duration-200 px-2 lg:px-3 py-1 lg:py-1.5 rounded-md ${
+                activeCategory === cat.id
+                  ? getThemeClass(cat.id)
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </nav>
+
+        {/* Right side - Icon links */}
+        <div className="flex items-center gap-2 lg:gap-4">
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 transition-colors hover:text-gray-900"
+            aria-label="GitHub"
+          >
+            <Github className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 transition-colors hover:text-gray-900"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
+          </a>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 transition-colors hover:text-gray-900"
+            aria-label="CV"
+          >
+            <FileText className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
+          </a>
+        </div>
+      </div>
+      </div>
+    </header>
+  );
+}

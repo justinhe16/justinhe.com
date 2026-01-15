@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* Make CSS custom properties animatable */
+@property --theme-bg-1 {
+  syntax: '<color>';
+  initial-value: #ffffff;
+  inherits: true;
+}
+
+@property --theme-bg-2 {
+  syntax: '<color>';
+  initial-value: #d4f1d7;
+  inherits: true;
+}
+
+@property --theme-signature {
+  syntax: '<color>';
+  initial-value: #2c3e2f;
+  inherits: true;
+}
+
+@property --theme-primary {
+  syntax: '<color>';
+  initial-value: #4CAF50;
+  inherits: true;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Theme Colors - Default (Green) */
+  --theme-primary: #4CAF50;
+  --theme-bg-1: #ffffff;
+  --theme-bg-2: #d4f1d7;
+  --theme-signature: #2c3e2f;
+
+  /* Transition for smooth theme changes */
+  transition: --theme-bg-1 0.8s ease-in-out,
+              --theme-bg-2 0.8s ease-in-out,
+              --theme-signature 0.8s ease-in-out,
+              --theme-primary 0.8s ease-in-out;
+
+  /* Projects Theme (Blue) */
+  --theme-projects-primary: #2196F3;
+  --theme-projects-bg-1: #ffffff;
+  --theme-projects-bg-2: #bbdefb;
+  --theme-projects-signature: #1565C0;
+
+  /* Hobbies Theme (Red) */
+  --theme-hobbies-primary: #F44336;
+  --theme-hobbies-bg-1: #ffffff;
+  --theme-hobbies-bg-2: #ffcdd2;
+  --theme-hobbies-signature: #C62828;
+
+  /* Blog Theme (Yellow) */
+  --theme-blog-primary: #FFC107;
+  --theme-blog-bg-1: #ffffff;
+  --theme-blog-bg-2: #fff9c4;
+  --theme-blog-signature: #F57F17;
+
+  /* Category Card Colors */
+  --card-blog-light: rgba(251, 191, 36, 0.3);
+  --card-blog-mid: rgba(245, 158, 11, 0.15);
+  --card-project-light: rgba(59, 130, 246, 0.3);
+  --card-project-mid: rgba(37, 99, 235, 0.15);
+  --card-hobby-light: rgba(239, 68, 68, 0.3);
+  --card-hobby-mid: rgba(220, 38, 38, 0.15);
+  --card-default-light: rgba(156, 163, 175, 0.3);
+  --card-default-mid: rgba(107, 114, 128, 0.15);
+
+  /* Glassmorphism Card Background */
+  --card-glass-light: rgba(255, 255, 255, 0.5);
+  --card-glass-mid: rgba(255, 255, 255, 0.5);
+
+  /* Trigger Word Underline Colors */
+  --trigger-digital-nook: #f59e0b;
+  --trigger-building: #3b82f6;
+  --trigger-dori: #60a5fa;
+  --trigger-serial-hobbyist: #ef4444;
+  --trigger-video: #a855f7;
+  --trigger-surfing: #f87171;
+  --trigger-rock-climbing: #f59e0b;
+  --trigger-thoughts: #fbbf24;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-core-bg: #c6d9c5;
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-google-sans-flex);
+}
+
+* {
+  font-family: var(--font-fraunces), serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: var(--font-fraunces), serif;
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+p {
+  line-height: 1.3;
+}
+
+/* Secondary font (Google Sans Flex) for UI elements */
+.font-sans {
+  font-family: var(--font-google-sans-flex), sans-serif;
+}
+
+/* Utility classes for specific use cases */
+.caption,
+figcaption,
+.tag,
+.label,
+.metadata,
+.badge {
+  font-family: var(--font-google-sans-flex), sans-serif;
+  font-weight: 400;
+}
+
+.caption,
+figcaption {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.tag,
+.badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Grain Background Container */
+#grain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Smooth SVG stroke color transitions */
+svg path {
+  transition: stroke 0.8s ease-in-out;
+}
+
+/* Category button left-to-right highlight effect */
+.category-btn {
+  position: relative;
+}
+
+.category-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  z-index: 0;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.category-btn:hover::before {
+  width: 100%;
+}
+
+/* Theme-specific highlight colors */
+.category-projects::before {
+  background-color: rgba(33, 150, 243, 0.5);
+}
+
+.category-hobbies::before {
+  background-color: rgba(244, 67, 54, 0.5);
+}
+
+.category-blog::before {
+  background-color: rgba(255, 193, 7, 0.5);
+}
+
+.category-default::before {
+  background-color: rgba(76, 175, 80, 0.5);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
