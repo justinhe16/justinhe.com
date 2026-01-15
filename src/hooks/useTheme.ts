@@ -13,7 +13,7 @@ const themeColors: Record<Theme, ThemeColors> = {
   default: {
     bg1: '#ffffff',
     bg2: '#f5e6d3',
-    signature: '#8B7355',
+    signature: '#000000',
     primary: '#A0826D',
   },
   projects: {

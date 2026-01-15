@@ -75,13 +75,15 @@ export default function BlogDetailPage() {
   };
 
   const handleHomeClick = () => {
+    // Clear the flag so home page shows full animation
+    sessionStorage.removeItem('categoryPageLoaded');
     router.push('/');
   };
 
   return (
     <div className="min-h-screen relative">
       {/* Header */}
-      <div ref={headerRef} className={`relative z-50 ${isFirstLoad ? 'opacity-0' : ''}`}>
+      <div ref={headerRef} className={`fixed top-0 left-0 right-0 z-50 ${isFirstLoad ? 'opacity-0' : ''}`}>
         <Header
           onCategoryClick={handleCategoryClick}
           onHomeClick={handleHomeClick}

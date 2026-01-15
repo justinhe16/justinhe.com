@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { animate } from 'animejs';
 import BaseCard from './BaseCard';
 import { ProjectCardData } from '@/types/cards';
+import { useHoverTrigger } from '@/contexts/HoverTriggerContext';
 
 interface ProjectCardProps {
   data: ProjectCardData;
@@ -12,13 +13,21 @@ interface ProjectCardProps {
 export default function ProjectCard({ data }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
+  const { activeTrigger } = useHoverTrigger();
+
+  // Check if this card should be triggered
+  const isTriggered =
+    (activeTrigger === 'building' && data.category === 'project') ||
+    (activeTrigger === 'dori' && data.id.includes('dori'));
 
   useEffect(() => {
     if (imageRef.current) {
-      if (isHovered) {
-        // Zoom, tilt, and raise effect on hover
+      const shouldAnimate = isHovered || isTriggered;
+
+      if (shouldAnimate) {
+        // Zoom, tilt, and raise effect on hover or trigger
         animate(imageRef.current, {
-          scale: [1, 1.60],
+          scale: [1, 1.10],
           rotate: [0, -2],
           translateY: [0, -30],
           duration: 500,
@@ -27,7 +36,7 @@ export default function ProjectCard({ data }: ProjectCardProps) {
       } else {
         // Return to normal
         animate(imageRef.current, {
-          scale: [1.60, 1],
+          scale: [1.10, 1],
           rotate: [-2, 0],
           translateY: [-30, 0],
           duration: 500,
@@ -35,7 +44,7 @@ export default function ProjectCard({ data }: ProjectCardProps) {
         });
       }
     }
-  }, [isHovered]);
+  }, [isHovered, isTriggered]);
 
   return (
     <BaseCard
@@ -58,12 +67,12 @@ export default function ProjectCard({ data }: ProjectCardProps) {
         </div>
 
         {/* Image - Lower placement */}
-        <div className="flex items-end justify-center mt-10">
+        <div className="flex items-end justify-center mt-5">
           <img
             ref={imageRef}
             src={data.imageUrl}
             alt={data.title}
-            className="max-w-[80%] max-h-[65%] object-contain rounded-md shadow-md"
+            className="max-w-[100%] max-h-[85%] object-contain rounded-md shadow-md"
           />
         </div>
       </div>

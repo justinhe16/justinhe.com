@@ -100,14 +100,13 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
     }
 
     const shouldTrigger =
-      activeTrigger === 'digital-nook' || // All cards
       (activeTrigger === 'building' && category === 'project') ||
       (activeTrigger === 'dori' && cardId.includes('dori')) ||
-      (activeTrigger === 'serial-hobbyist' && category === 'hobby') ||
-      (activeTrigger === 'video' && cardId.includes('video')) ||
-      (activeTrigger === 'surfing' && cardId === 'hobby-mentawai-surfing') ||
+      (activeTrigger === 'travel' && (cardId === 'hobby-coachella' || cardId === 'hobby-angels-landing')) ||
+      (activeTrigger === 'foraging-frames' && cardId === 'hobby-palm-trees') ||
+      (activeTrigger === 'surfing' && (cardId.includes('surfing') || cardId.includes('mentawai'))) ||
       (activeTrigger === 'rock-climbing' && cardId.includes('rock-climbing')) ||
-      (activeTrigger === 'thoughts' && category === 'blog');
+      (activeTrigger === 'write' && category === 'blog');
 
     if (shouldTrigger) {
       // Generate random tilt (left or right) - similar to hover effect
@@ -271,6 +270,8 @@ export default function BaseCard({ cardId, width, height, category, hasDetailPag
   return (
     <div
       ref={cardRef}
+      data-card-id={cardId}
+      data-category={category}
       className={`${widthClass} ${heightClass} spotlight-card group relative overflow-visible rounded-lg transition-all duration-300 ease-in-out`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

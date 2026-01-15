@@ -109,13 +109,15 @@ function ProjectsContent() {
     }
 
     setTimeout(() => {
+      // Clear the flag so home page shows full animation
+      sessionStorage.removeItem('categoryPageLoaded');
       router.push('/', { scroll: false });
     }, 300);
   };
 
   return (
     <>
-      <div ref={headerRef} className={`relative z-50 ${isFirstLoad ? 'opacity-0' : ''}`}>
+      <div ref={headerRef} className={`fixed top-0 left-0 right-0 z-50 ${isFirstLoad ? 'opacity-0' : ''}`}>
         <Header
           activeCategory="projects"
           onHomeClick={handleHomeClick}

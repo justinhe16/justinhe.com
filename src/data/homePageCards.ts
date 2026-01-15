@@ -13,10 +13,13 @@ const getCardById = (id: string): CardData | undefined => {
 
 // Define which cards to show on homepage (in order)
 const homePageCardIds = [
-  'quitting-my-job',
   'hobby-angels-landing',
-  'project-claude-surf',
+  'hobby-coachella',
   'hobby-mentawai-surfing',
+  'creating-a-home-on-the-internet',
+  'project-claude-surf',
+  'hobby-palm-trees',
+  'hobby-rock-climbing-dyno',
 ];
 
 // Get the actual card data for homepage

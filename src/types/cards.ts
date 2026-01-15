@@ -10,6 +10,7 @@ export interface BlogCardData {
   title: string;
   date: string;
   contentPreview: string; // First 2-3 sentences for typewriter effect on card hover
+  imageUrl: string;
   content?: string; // Full blog content for detail page
   hasDetailPage?: boolean; // If true, routes to /blog/{id}, otherwise to /blog
 }
@@ -32,6 +33,7 @@ export interface HobbyCardData {
   height: CardHeight;
   activity: string; // e.g., "Climbing", "Surfing"
   imageUrl: string;
+  videoUrl?: string; // Optional video URL that plays on hover
   hasDetailPage?: boolean; // If true, routes to /hobbies/{id}, otherwise to /hobbies
 }
 

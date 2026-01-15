@@ -15,7 +15,7 @@
 
 @property --theme-signature {
   syntax: '<color>';
-  initial-value: #2c3e2f;
+  initial-value: #000000;
   inherits: true;
 }
 
@@ -33,7 +33,7 @@
   --theme-primary: #4CAF50;
   --theme-bg-1: #ffffff;
   --theme-bg-2: #d4f1d7;
-  --theme-signature: #2c3e2f;
+  --theme-signature: #000000;
 
   /* Transition for smooth theme changes */
   transition: --theme-bg-1 0.8s ease-in-out,
@@ -60,18 +60,18 @@
   --theme-blog-signature: #F57F17;
 
   /* Category Card Colors */
-  --card-blog-light: rgba(251, 191, 36, 0.3);
-  --card-blog-mid: rgba(245, 158, 11, 0.15);
-  --card-project-light: rgba(59, 130, 246, 0.3);
-  --card-project-mid: rgba(37, 99, 235, 0.15);
-  --card-hobby-light: rgba(239, 68, 68, 0.3);
-  --card-hobby-mid: rgba(220, 38, 38, 0.15);
+  --card-blog-light: rgba(255, 207, 0, 0.7);
+  --card-blog-mid: rgba(255, 207, 0, 0.5);
+  --card-project-light: rgba(45, 175, 255, 0.7);
+  --card-project-mid: rgba(45, 175, 255, 0.5);
+  --card-hobby-light: rgba(238, 97, 35, 0.7);
+  --card-hobby-mid: rgba(238, 97, 35, 0.5);
   --card-default-light: rgba(156, 163, 175, 0.3);
   --card-default-mid: rgba(107, 114, 128, 0.15);
 
   /* Glassmorphism Card Background */
-  --card-glass-light: rgba(255, 255, 255, 0.5);
-  --card-glass-mid: rgba(255, 255, 255, 0.5);
+  --card-glass-light: rgba(0, 0, 0, 0.1);
+  --card-glass-mid: rgba(3, 3, 3, 0.1);
 
   /* Trigger Word Underline Colors */
   --trigger-digital-nook: #f59e0b;
@@ -87,7 +87,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-core-bg: #c6d9c5;
+  --color-core-bg: #F7F7F7;
   --font-serif: var(--font-fraunces);
   --font-sans: var(--font-google-sans-flex);
 }

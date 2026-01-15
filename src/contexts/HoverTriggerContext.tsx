@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type HoverTrigger = 'digital-nook' | 'building' | 'dori' | 'serial-hobbyist' | 'video' | 'surfing' | 'rock-climbing' | 'thoughts' | null;
+type HoverTrigger = 'building' | 'dori' | 'travel' | 'foraging-frames' | 'surfing' | 'rock-climbing' | 'write' | null;
 
 interface HoverTriggerContextType {
   activeTrigger: HoverTrigger;

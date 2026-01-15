@@ -25,9 +25,15 @@ export default function Header({ activeCategory, onCategoryClick, onHomeClick }:
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-8 lg:px-16 py-3 lg:py-4">
+    <header className="px-8 lg:px-16 py-3 lg:py-4">
       <div className="max-w-7xl mx-auto">
-        <div className="w-full rounded-full shadow-lg bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-between px-4 lg:px-8 py-2 lg:py-3">
+        <div
+          className="w-full rounded-full backdrop-blur-xl flex items-center justify-between px-4 lg:px-8 py-2 lg:py-3"
+          style={{
+            background: 'linear-gradient(135deg, var(--card-glass-light) 0%, var(--card-glass-mid) 50%, var(--card-glass-light) 100%)',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.08)',
+          }}
+        >
         {/* Left side - Navigation */}
         <nav className="flex items-center gap-2 lg:gap-4">
           <button

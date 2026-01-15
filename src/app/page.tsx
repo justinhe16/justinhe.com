@@ -116,8 +116,68 @@ function HomeContent() {
           easing: 'out(2)',
         });
       }
+
     }
   }, [showContent]);
+
+  // Auto-scroll to first triggered card when hovering trigger words
+  useEffect(() => {
+    console.log('🔍 Auto-scroll effect triggered, activeTrigger:', activeTrigger);
+
+    if (!activeTrigger || !rightContentRef.current) {
+      console.log('❌ No trigger or ref');
+      return;
+    }
+
+    // Find all cards in the right column
+    const cards = rightContentRef.current.querySelectorAll('.spotlight-card');
+    console.log('📦 Found cards:', cards.length);
+
+    // Find the first triggered card based on activeTrigger
+    let firstTriggeredCard: Element | null = null;
+
+    cards.forEach((card) => {
+      const cardElement = card as HTMLElement;
+      const cardId = cardElement.dataset?.cardId;
+      const category = cardElement.dataset?.category;
+      console.log('🃏 Card ID:', cardId, 'Category:', category);
+
+      if (!cardId) return;
+
+      const shouldScroll =
+        (activeTrigger === 'building' && category === 'project') ||
+        (activeTrigger === 'dori' && cardId.includes('dori')) ||
+        (activeTrigger === 'travel' && (cardId === 'hobby-coachella' || cardId === 'hobby-angels-landing')) ||
+        (activeTrigger === 'foraging-frames' && cardId === 'hobby-palm-trees') ||
+        (activeTrigger === 'surfing' && (cardId.includes('surfing') || cardId.includes('mentawai'))) ||
+        (activeTrigger === 'rock-climbing' && cardId.includes('rock-climbing')) ||
+        (activeTrigger === 'write' && category === 'blog');
+
+      console.log(`  Card ${cardId} shouldScroll:`, shouldScroll);
+
+      if (shouldScroll && !firstTriggeredCard) {
+        firstTriggeredCard = card;
+        console.log('✅ First triggered card found:', cardId);
+      }
+    });
+
+    // Scroll to the first triggered card
+    if (firstTriggeredCard) {
+      console.log('📜 Scrolling to card');
+      const cardRect = firstTriggeredCard.getBoundingClientRect();
+
+      // Calculate scroll position relative to the page
+      const scrollTop = window.scrollY + cardRect.top - 150;
+      console.log('📍 Scroll position:', scrollTop);
+
+      window.scrollTo({
+        top: scrollTop,
+        behavior: 'smooth',
+      });
+    } else {
+      console.log('❌ No triggered card found');
+    }
+  }, [activeTrigger]);
 
   return (
     <>
@@ -148,7 +208,7 @@ function HomeContent() {
           <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-12 lg:pt-24">
             <div
               ref={leftContentRef}
-              className="flex flex-col justify-start px-8 lg:px-12 py-8 lg:py-12 space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/40 h-auto lg:h-[750px] transition-opacity duration-300"
+              className="flex flex-col justify-start px-8 lg:px-12 py-8 lg:py-12 space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/0 h-auto lg:h-[750px] transition-opacity duration-300"
               style={{
                 background: 'linear-gradient(135deg, var(--card-glass-light) 0%, var(--card-glass-mid) 50%, var(--card-glass-light) 100%)',
                 opacity: isLeftCardDimmed ? 0.3 : 1,
@@ -156,14 +216,17 @@ function HomeContent() {
             >
               <div className="fade-in-item opacity-0">
                 <p className="text-3xl lg:text-5xl">
-                 Welcome! I'm Justin.
+                 Hello! I'm Justin.
                   </p>
-                  <p className="intro-text text-xl lg:text-3xl text-foreground max-w-2xl text-left" style={{ lineHeight: '1.35' }}>
+                  <p className="intro-text text-large lg:text-2xl text-foreground max-w-2xl text-left" style={{ lineHeight: '1.35' }}>
                     <br />
-                    Welcome to my <TriggerWord trigger="digital-nook" showUnderline={showUnderlines}>digital nook</TriggerWord> - I love <TriggerWord trigger="building" showUnderline={showUnderlines}>building</TriggerWord>, and am currently working on <TriggerWord trigger="dori" showUnderline={showUnderlines}>dori</TriggerWord> full time.
+                    Welcome to my digital nook - I love <TriggerWord trigger="building" showUnderline={showUnderlines}>building</TriggerWord>, and am currently working on <TriggerWord trigger="dori" showUnderline={showUnderlines}>dori</TriggerWord> full time.
                     <br />
                     <br />
-                    Beyond that, I'm also a <TriggerWord trigger="serial-hobbyist" showUnderline={showUnderlines}>serial hobbyist</TriggerWord> - I love storytelling through <TriggerWord trigger="video" showUnderline={showUnderlines}>video</TriggerWord> and staying active with <TriggerWord trigger="surfing" showUnderline={showUnderlines}>surfing</TriggerWord> and <TriggerWord trigger="rock-climbing" showUnderline={showUnderlines}>rock climbing</TriggerWord>. Ocassionally, I'll feel compelled to <TriggerWord trigger="thoughts" showUnderline={showUnderlines}>share my thoughts</TriggerWord>!
+                    Beyond that, I indulge in <TriggerWord trigger="travel" showUnderline={showUnderlines}>traveling</TriggerWord> and <TriggerWord trigger="foraging-frames" showUnderline={showUnderlines}>foraging frames</TriggerWord>! I also <TriggerWord trigger="surfing" showUnderline={showUnderlines}>ride waves</TriggerWord> and <TriggerWord trigger="rock-climbing" showUnderline={showUnderlines}>climb rocks</TriggerWord>.
+                    <br />
+                    <br />
+                    Sometimes I <TriggerWord trigger="write" showUnderline={showUnderlines}>write</TriggerWord>, too.
                   </p>
                 </div>
 
