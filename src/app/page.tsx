@@ -91,15 +91,18 @@ function HomeContent() {
     if (showContent) {
       // Fade in mobile header first
       if (headerRef.current) {
-        // Remove will-change after animation
-        const headerEl = headerRef.current;
-        animate(headerEl, {
+        animate(headerRef.current, {
           opacity: [0, 1],
           duration: 400,
           easing: 'out(2)',
           complete: () => {
-            if (headerEl) {
-              headerEl.style.willChange = 'auto';
+            // Force a reflow to fix backdrop-filter rendering on mobile
+            if (headerRef.current && window.innerWidth < 1024) {
+              const header = headerRef.current;
+              // Trigger recomposition by temporarily modifying a property
+              header.style.transform = 'translateZ(0)';
+              // Force browser to recalculate
+              void header.offsetHeight;
             }
           },
         });
@@ -202,11 +205,7 @@ function HomeContent() {
   return (
     <>
       {/* Header - Mobile only, fades in with content */}
-      <div
-        ref={headerRef}
-        className="lg:hidden fixed top-0 left-0 right-0 z-50 opacity-0"
-        style={{ willChange: 'opacity' }}
-      >
+      <div ref={headerRef} className="lg:hidden fixed top-0 left-0 right-0 z-50 opacity-0">
         <Header
           onCategoryClick={(category) => router.push(`/${category}`)}
           onHomeClick={() => router.push('/')}
