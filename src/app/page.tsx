@@ -41,6 +41,12 @@ function HomeContent() {
             opacity: [1, 0],
             duration: 800,
             easing: 'out(3)',
+            complete: () => {
+              // Completely hide signature after fade on mobile
+              if (signatureRef.current) {
+                signatureRef.current.style.display = 'none';
+              }
+            },
           });
         } else {
           // On desktop, slide to left column position
