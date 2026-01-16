@@ -229,7 +229,7 @@ function HomeContent() {
           <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-16 lg:pt-24">
             <div
               ref={leftContentRef}
-              className="flex flex-col justify-start px-8 lg:px-12 py-4 lg:py-12 space-y-8 lg:space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/0 h-auto lg:h-[680px] transition-opacity duration-300"
+              className="flex flex-col justify-start px-8 lg:px-12 py-0 lg:py-12 space-y-8 lg:space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/0 h-auto lg:h-[680px] transition-opacity duration-300"
               style={{
                 background: 'linear-gradient(135deg, var(--card-glass-light) 0%, var(--card-glass-mid) 50%, var(--card-glass-light) 100%)',
                 opacity: isLeftCardDimmed ? 0.3 : 1,
