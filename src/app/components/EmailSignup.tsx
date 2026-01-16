@@ -148,7 +148,7 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
   };
 
   return (
-    <div ref={containerRef} className="mt-6">
+    <div ref={containerRef} className="mt-6 min-h-[60px]">
       {(state === 'initial' || state === 'expanding') && (
         <button
           ref={buttonRef}
