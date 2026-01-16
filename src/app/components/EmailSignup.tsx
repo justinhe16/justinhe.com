@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { animate } from 'animejs';
+import { animate, stagger, splitText } from 'animejs';
 import { addEmailToList, isSupabaseConfigured } from '@/lib/supabase';
 
 type SignupState = 'initial' | 'expanding' | 'expanded' | 'submitting' | 'success' | 'error';
@@ -10,8 +10,10 @@ export default function EmailSignup() {
   const [state, setState] = useState<SignupState>('initial');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showButton, setShowButton] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonTextRef = useRef<HTMLSpanElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
@@ -20,6 +22,32 @@ export default function EmailSignup() {
   if (!isSupabaseConfigured()) {
     return null;
   }
+
+  // Typewriter effect for initial button
+  useEffect(() => {
+    // Small delay before showing to coordinate with page animations
+    const timer = setTimeout(() => {
+      setShowButton(true);
+
+      if (buttonTextRef.current) {
+        const { words } = splitText(buttonTextRef.current, {
+          words: true,
+        });
+
+        if (words && words.length > 0) {
+          animate(words, {
+            opacity: [0, 1],
+            translateY: [5, 0],
+            duration: 300,
+            delay: stagger(50),
+            easing: 'out(2)',
+          });
+        }
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Animate success message when it appears
   useEffect(() => {
@@ -126,14 +154,14 @@ export default function EmailSignup() {
 
   return (
     <div ref={containerRef} className="mt-6">
-      {(state === 'initial' || state === 'expanding') && (
+      {showButton && (state === 'initial' || state === 'expanding') && (
         <button
           ref={buttonRef}
           onClick={handleExpand}
           disabled={state === 'expanding'}
           className="text-sm underline decoration-1 underline-offset-4 hover:decoration-2 transition-all"
         >
-          sign up for my email list :)
+          <span ref={buttonTextRef}>sign up for my email list :)</span>
         </button>
       )}
 
