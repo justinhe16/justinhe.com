@@ -33,14 +33,22 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
 
     // Small delay before showing for smooth transition
     const timer = setTimeout(() => {
-      setShowButton(true);
-
       if (buttonTextRef.current) {
+        // Split text into words
         const { words } = splitText(buttonTextRef.current, {
           words: true,
         });
 
         if (words && words.length > 0) {
+          // Set all words to invisible first
+          words.forEach((word: HTMLElement) => {
+            word.style.opacity = '0';
+          });
+
+          // Show button container
+          setShowButton(true);
+
+          // Animate words with typewriter effect
           animate(words, {
             opacity: [0, 1],
             translateY: [5, 0],
@@ -160,14 +168,15 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
 
   return (
     <div ref={containerRef} className="mt-6">
-      {showButton && (state === 'initial' || state === 'expanding') && (
+      {(state === 'initial' || state === 'expanding') && (
         <button
           ref={buttonRef}
           onClick={handleExpand}
           disabled={state === 'expanding'}
           className="text-sm underline decoration-1 underline-offset-4 hover:decoration-2 transition-all"
+          style={{ opacity: showButton ? 1 : 0 }}
         >
-          <span ref={buttonTextRef}>sign up for my email list :)</span>
+          <span ref={buttonTextRef} className="signup-text">sign up for my email list :)</span>
         </button>
       )}
 
