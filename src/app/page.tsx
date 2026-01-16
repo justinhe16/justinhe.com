@@ -251,7 +251,7 @@ function HomeContent() {
                   </p>
                 </div>
 
-                <div>
+                <div className="-mt-6">
                   <EmailSignup startAnimation={showUnderlines} />
                 </div>
             </div>
