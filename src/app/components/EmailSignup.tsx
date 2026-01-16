@@ -173,8 +173,13 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
           ref={buttonRef}
           onClick={handleExpand}
           disabled={state === 'expanding'}
-          className="text-sm underline decoration-1 underline-offset-4 hover:decoration-2 transition-all"
-          style={{ opacity: showButton ? 1 : 0 }}
+          className="text-sm transition-all relative cursor-pointer hover:opacity-80"
+          style={{
+            opacity: showButton ? 1 : 0,
+            textDecoration: 'underline',
+            textDecorationThickness: '1px',
+            textUnderlineOffset: '4px'
+          }}
         >
           <span ref={buttonTextRef} className="signup-text">sign up for my email list :)</span>
         </button>
