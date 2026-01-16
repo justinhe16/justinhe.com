@@ -33,7 +33,7 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
 
     // Small delay before showing for smooth transition
     const timer = setTimeout(() => {
-      if (buttonTextRef.current) {
+      if (buttonTextRef.current && buttonRef.current) {
         // Split text into words
         const { words } = splitText(buttonTextRef.current, {
           words: true,
@@ -55,6 +55,14 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
             duration: 300,
             delay: stagger(50),
             easing: 'out(2)',
+            complete: () => {
+              // Add underline after animation completes
+              if (buttonRef.current) {
+                buttonRef.current.style.textDecoration = 'underline';
+                buttonRef.current.style.textDecorationThickness = '1px';
+                buttonRef.current.style.textUnderlineOffset = '4px';
+              }
+            },
           });
         }
       }
@@ -174,12 +182,7 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
           onClick={handleExpand}
           disabled={state === 'expanding'}
           className="text-sm transition-all relative cursor-pointer hover:opacity-80"
-          style={{
-            opacity: showButton ? 1 : 0,
-            textDecoration: 'underline',
-            textDecorationThickness: '1px',
-            textUnderlineOffset: '4px'
-          }}
+          style={{ opacity: showButton ? 1 : 0 }}
         >
           <span ref={buttonTextRef} className="signup-text">sign up for my email list :)</span>
         </button>
