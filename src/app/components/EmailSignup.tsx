@@ -60,6 +60,12 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
   const handleExpand = () => {
     setState('expanding');
 
+    // Remove underline and hover effect immediately
+    if (buttonRef.current) {
+      buttonRef.current.style.textDecoration = 'none';
+      buttonRef.current.classList.remove('hover:decoration-2');
+    }
+
     // Animate button fading out and morphing
     if (buttonRef.current) {
       animate(buttonRef.current, {
@@ -154,7 +160,7 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
           ref={buttonRef}
           onClick={handleExpand}
           disabled={state === 'expanding'}
-          className="text-sm underline decoration-1 underline-offset-4 hover:decoration-2 transition-all cursor-pointer"
+          className="text-sm transition-all cursor-pointer underline decoration-1 underline-offset-4 hover:decoration-2"
           style={{ opacity: 0 }}
         >
           sign up for my email list :)
