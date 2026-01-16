@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { animate, stagger, splitText } from 'animejs';
+import { animate } from 'animejs';
 import { addEmailToList, isSupabaseConfigured } from '@/lib/supabase';
 
 type SignupState = 'initial' | 'expanding' | 'expanded' | 'submitting' | 'success' | 'error';
@@ -14,10 +14,8 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
   const [state, setState] = useState<SignupState>('initial');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [showButton, setShowButton] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const buttonTextRef = useRef<HTMLSpanElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
@@ -27,48 +25,23 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
     return null;
   }
 
-  // Typewriter effect for initial button - starts after intro text finishes
+  // Fade in button after intro text finishes
   useEffect(() => {
     if (!startAnimation) return;
 
-    // Small delay before showing for smooth transition
-    const timer = setTimeout(() => {
-      if (buttonTextRef.current && buttonRef.current) {
-        // Split text into words
-        const { words } = splitText(buttonTextRef.current, {
-          words: true,
-        });
-
-        if (words && words.length > 0) {
-          // Set all words to invisible first
-          words.forEach((word: HTMLElement) => {
-            word.style.opacity = '0';
-          });
-
-          // Show button container
-          setShowButton(true);
-
-          // Animate words with typewriter effect
-          animate(words, {
+    if (buttonRef.current) {
+      // Small delay before showing for smooth transition
+      setTimeout(() => {
+        if (buttonRef.current) {
+          animate(buttonRef.current, {
             opacity: [0, 1],
             translateY: [5, 0],
-            duration: 300,
-            delay: stagger(50),
+            duration: 400,
             easing: 'out(2)',
-            complete: () => {
-              // Add underline after animation completes
-              if (buttonRef.current) {
-                buttonRef.current.style.textDecoration = 'underline';
-                buttonRef.current.style.textDecorationThickness = '1px';
-                buttonRef.current.style.textUnderlineOffset = '4px';
-              }
-            },
           });
         }
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
+      }, 100);
+    }
   }, [startAnimation]);
 
   // Animate success message when it appears
@@ -181,10 +154,10 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
           ref={buttonRef}
           onClick={handleExpand}
           disabled={state === 'expanding'}
-          className="text-sm transition-all relative cursor-pointer hover:opacity-80"
-          style={{ opacity: showButton ? 1 : 0 }}
+          className="text-sm underline decoration-1 underline-offset-4 hover:decoration-2 transition-all cursor-pointer"
+          style={{ opacity: 0 }}
         >
-          <span ref={buttonTextRef} className="signup-text">sign up for my email list :)</span>
+          sign up for my email list :)
         </button>
       )}
 
