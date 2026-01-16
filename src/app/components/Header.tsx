@@ -60,7 +60,7 @@ export default function Header({ activeCategory, onCategoryClick, onHomeClick }:
         {/* Right side - Icon links */}
         <div className="flex items-center gap-2 lg:gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/justinhe16"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 transition-colors hover:text-gray-900"
@@ -69,7 +69,7 @@ export default function Header({ activeCategory, onCategoryClick, onHomeClick }:
             <Github className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/justinhe16/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 transition-colors hover:text-gray-900"
@@ -78,11 +78,11 @@ export default function Header({ activeCategory, onCategoryClick, onHomeClick }:
             <Linkedin className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
           </a>
           <a
-            href="/cv.pdf"
+            href="/justin_he_resume_2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 transition-colors hover:text-gray-900"
-            aria-label="CV"
+            aria-label="Resume"
           >
             <FileText className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
           </a>
