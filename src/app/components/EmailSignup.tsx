@@ -169,7 +169,7 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
 
       {(state === 'expanded' || state === 'submitting') && (
         <div ref={formRef} style={{ opacity: 0 }}>
-          <form onSubmit={handleSubmit} className="flex gap-3 items-center">
+          <form onSubmit={handleSubmit} className="flex gap-3 items-center max-w-xs">
             <div className="flex-1 relative">
               <input
                 ref={inputRef}
