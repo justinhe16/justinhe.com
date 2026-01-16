@@ -196,9 +196,8 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
       )}
 
       {state === 'success' && (
-        <div ref={successRef} className="flex items-center gap-2 text-green-700" style={{ opacity: 0 }}>
-          <span className="text-xl">✓</span>
-          <span className="text-sm">thank you for signing up!</span>
+        <div ref={successRef} className="text-green-700 text-sm" style={{ opacity: 0 }}>
+          thank you for signing up!
         </div>
       )}
 
