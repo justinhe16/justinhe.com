@@ -47,25 +47,28 @@ export default function EmailSignup() {
       });
     }
 
-    // After button fades, show and animate the form
+    // After button fades, change state to show form
     setTimeout(() => {
       setState('expanded');
+    }, 300);
+  };
 
-      if (formRef.current) {
-        animate(formRef.current, {
-          opacity: [0, 1],
-          translateY: [-10, 0],
-          duration: 500,
-          easing: 'out(3)',
-        });
-      }
+  // Animate form when it appears
+  useEffect(() => {
+    if (state === 'expanded' && formRef.current) {
+      animate(formRef.current, {
+        opacity: [0, 1],
+        translateY: [-10, 0],
+        duration: 500,
+        easing: 'out(3)',
+      });
 
-      // Focus input after animation
+      // Focus input after animation starts
       setTimeout(() => {
         inputRef.current?.focus();
       }, 200);
-    }, 300);
-  };
+    }
+  }, [state]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,7 +138,7 @@ export default function EmailSignup() {
       )}
 
       {(state === 'expanded' || state === 'submitting') && (
-        <div ref={formRef} className="opacity-0">
+        <div ref={formRef} style={{ opacity: 0 }}>
           <form onSubmit={handleSubmit} className="flex gap-3 items-center">
             <div className="flex-1 relative">
               <input
@@ -163,7 +166,7 @@ export default function EmailSignup() {
       )}
 
       {state === 'success' && (
-        <div ref={successRef} className="flex items-center gap-2 text-green-700 opacity-0">
+        <div ref={successRef} className="flex items-center gap-2 text-green-700" style={{ opacity: 0 }}>
           <span className="text-xl">✓</span>
           <span className="text-sm">thank you for signing up!</span>
         </div>
