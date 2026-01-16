@@ -252,7 +252,7 @@ function HomeContent() {
                 </div>
 
                 <div className="fade-in-item opacity-0">
-                  <EmailSignup />
+                  <EmailSignup startAnimation={showUnderlines} />
                 </div>
             </div>
           </div>

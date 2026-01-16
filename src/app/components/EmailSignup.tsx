@@ -6,7 +6,11 @@ import { addEmailToList, isSupabaseConfigured } from '@/lib/supabase';
 
 type SignupState = 'initial' | 'expanding' | 'expanded' | 'submitting' | 'success' | 'error';
 
-export default function EmailSignup() {
+interface EmailSignupProps {
+  startAnimation?: boolean;
+}
+
+export default function EmailSignup({ startAnimation = false }: EmailSignupProps) {
   const [state, setState] = useState<SignupState>('initial');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -23,9 +27,11 @@ export default function EmailSignup() {
     return null;
   }
 
-  // Typewriter effect for initial button
+  // Typewriter effect for initial button - starts after intro text finishes
   useEffect(() => {
-    // Small delay before showing to coordinate with page animations
+    if (!startAnimation) return;
+
+    // Small delay before showing for smooth transition
     const timer = setTimeout(() => {
       setShowButton(true);
 
@@ -47,7 +53,7 @@ export default function EmailSignup() {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [startAnimation]);
 
   // Animate success message when it appears
   useEffect(() => {
