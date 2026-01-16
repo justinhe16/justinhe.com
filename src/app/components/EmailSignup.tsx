@@ -177,7 +177,7 @@ export default function EmailSignup({ startAnimation = false }: EmailSignupProps
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="w-full px-0 py-2 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:border-gray-800 font-sans text-sm transition-colors placeholder:text-gray-400"
+                className="w-full px-0 py-2 bg-transparent border-0 focus:outline-none font-sans text-sm placeholder:text-gray-400"
                 disabled={state === 'submitting'}
               />
               {errorMessage && (
