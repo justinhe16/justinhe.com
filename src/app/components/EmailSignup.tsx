@@ -1,32 +1,70 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { animate } from 'animejs';
 import { addEmailToList, isSupabaseConfigured } from '@/lib/supabase';
 
-type SignupState = 'initial' | 'expanded' | 'submitting' | 'success' | 'error';
+type SignupState = 'initial' | 'expanding' | 'expanded' | 'submitting' | 'success' | 'error';
 
 export default function EmailSignup() {
   const [state, setState] = useState<SignupState>('initial');
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   // Don't render if Supabase isn't configured
   if (!isSupabaseConfigured()) {
     return null;
   }
 
-  const handleExpand = () => {
-    setState('expanded');
-    if (formRef.current) {
-      animate(formRef.current, {
-        height: [0, 'auto'],
+  // Animate success message when it appears
+  useEffect(() => {
+    if (state === 'success' && successRef.current) {
+      animate(successRef.current, {
         opacity: [0, 1],
-        duration: 400,
+        translateY: [10, 0],
+        scale: [0.95, 1],
+        duration: 500,
         easing: 'out(3)',
       });
     }
+  }, [state]);
+
+  const handleExpand = () => {
+    setState('expanding');
+
+    // Animate button fading out and morphing
+    if (buttonRef.current) {
+      animate(buttonRef.current, {
+        opacity: [1, 0],
+        scale: [1, 0.95],
+        duration: 300,
+        easing: 'out(2)',
+      });
+    }
+
+    // After button fades, show and animate the form
+    setTimeout(() => {
+      setState('expanded');
+
+      if (formRef.current) {
+        animate(formRef.current, {
+          opacity: [0, 1],
+          translateY: [-10, 0],
+          duration: 500,
+          easing: 'out(3)',
+        });
+      }
+
+      // Focus input after animation
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 200);
+    }, 300);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,30 +79,55 @@ export default function EmailSignup() {
     setState('submitting');
     setErrorMessage('');
 
+    // Animate form while submitting
+    if (formRef.current) {
+      animate(formRef.current, {
+        opacity: [1, 0.6],
+        scale: [1, 0.98],
+        duration: 300,
+        easing: 'out(2)',
+      });
+    }
+
     try {
       await addEmailToList(email);
 
-      setState('success');
-
-      // Animate to success state
+      // Animate out the form
       if (formRef.current) {
         animate(formRef.current, {
-          height: ['auto', 60],
+          opacity: [0.6, 0],
+          translateY: [0, -10],
           duration: 400,
           easing: 'out(2)',
         });
       }
+
+      // Show success after form animates out
+      setTimeout(() => {
+        setState('success');
+      }, 400);
     } catch (error: any) {
+      // Reset form animation on error
+      if (formRef.current) {
+        animate(formRef.current, {
+          opacity: [0.6, 1],
+          scale: [0.98, 1],
+          duration: 300,
+          easing: 'out(2)',
+        });
+      }
       setState('error');
       setErrorMessage(error.message || 'Something went wrong. Please try again.');
     }
   };
 
   return (
-    <div className="mt-6">
-      {state === 'initial' && (
+    <div ref={containerRef} className="mt-6">
+      {(state === 'initial' || state === 'expanding') && (
         <button
+          ref={buttonRef}
           onClick={handleExpand}
+          disabled={state === 'expanding'}
           className="text-sm underline decoration-1 underline-offset-4 hover:decoration-2 transition-all"
         >
           sign up for my email list :)
@@ -72,26 +135,26 @@ export default function EmailSignup() {
       )}
 
       {(state === 'expanded' || state === 'submitting') && (
-        <div ref={formRef} className="overflow-hidden">
-          <form onSubmit={handleSubmit} className="flex gap-2 items-start">
-            <div className="flex-1">
+        <div ref={formRef} className="opacity-0">
+          <form onSubmit={handleSubmit} className="flex gap-3 items-center">
+            <div className="flex-1 relative">
               <input
+                ref={inputRef}
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 font-sans text-sm"
+                className="w-full px-0 py-2 bg-transparent border-0 border-b-2 border-gray-300 focus:outline-none focus:border-gray-800 font-sans text-sm transition-colors placeholder:text-gray-400"
                 disabled={state === 'submitting'}
-                autoFocus
               />
               {errorMessage && (
-                <p className="text-red-500 text-xs mt-1 font-sans">{errorMessage}</p>
+                <p className="text-red-500 text-xs mt-1 font-sans absolute">{errorMessage}</p>
               )}
             </div>
             <button
               type="submit"
               disabled={state === 'submitting'}
-              className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition-colors disabled:opacity-50 font-sans text-sm"
+              className="text-2xl hover:scale-110 transition-transform disabled:opacity-50 disabled:scale-100"
             >
               {state === 'submitting' ? '...' : '→'}
             </button>
@@ -100,10 +163,7 @@ export default function EmailSignup() {
       )}
 
       {state === 'success' && (
-        <div
-          ref={formRef}
-          className="flex items-center gap-2 text-green-700"
-        >
+        <div ref={successRef} className="flex items-center gap-2 text-green-700 opacity-0">
           <span className="text-xl">✓</span>
           <span className="text-sm">thank you for signing up!</span>
         </div>
