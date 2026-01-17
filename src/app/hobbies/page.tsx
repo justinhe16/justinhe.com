@@ -128,12 +128,19 @@ function HobbiesContent() {
       <div className="min-h-screen relative">
         <div className="max-w-7xl mx-auto px-8 lg:px-16">
           <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-4 gap-8 pt-16 lg:pt-32 pb-12 lg:pb-24 opacity-0">
-          {/* Left Column - Description/Animations (1 column on desktop, full width on mobile) */}
+          {/* Left Column - Description Card (1 column on desktop, full width on mobile) */}
           <div className="lg:col-span-1">
-            <h2 className="text-2xl lg:text-3xl font-medium mb-4">Hobbies</h2>
-            <p className="text-sm lg:text-base text-gray-600 font-sans">
-              Things I love doing in my free time
-            </p>
+            <div
+              className="backdrop-blur-xl rounded-lg p-6 lg:p-8 h-full flex flex-col justify-center"
+              style={{
+                background: 'linear-gradient(135deg, var(--card-hobby-light) 0%, var(--card-hobby-mid) 50%, var(--card-hobby-light) 100%)',
+              }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-medium mb-4">Hobbies</h2>
+              <p className="text-sm lg:text-base text-gray-800 font-sans">
+                Things I love doing in my free time
+              </p>
+            </div>
           </div>
 
           {/* Right Columns - Card Grid (3 columns on desktop, full width on mobile) */}

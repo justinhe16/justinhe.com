@@ -46,7 +46,7 @@ function HomeContent() {
           // On desktop, slide to left column position
           animate(signatureRef.current, {
             translateX: [0, 'calc(-7vw)'],
-            translateY: [0, 'calc(25vh)'],
+            translateY: [0, 'calc(18vh)'],
             scale: [1, 0.5],
             duration: 800,
             easing: 'out(3)',
