@@ -19,12 +19,6 @@ const schibstedGrotesk = Schibsted_Grotesk({
 export const metadata: Metadata = {
   title: "Justin He",
   description: "Portfolio and personal website of Justin He",
-  icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' }
-    ],
-  },
 };
 
 export default function RootLayout({
