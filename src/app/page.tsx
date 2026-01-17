@@ -75,6 +75,7 @@ function HomeContent() {
 
   useEffect(() => {
     // Set default theme
+    console.log('🏠 Home page setting theme to default');
     switchTheme('default');
 
     // Clear category page loaded flag when returning to home
@@ -226,7 +227,7 @@ function HomeContent() {
               className="grid grid-cols-1 lg:grid-cols-2"
             >
           {/* Left Column - Sticky on desktop, static on mobile */}
-          <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-16 lg:pt-24">
+          <div className="lg:sticky top-0 lg:h-screen flex justify-center relative pt-20 lg:pt-20">
             <div
               ref={leftContentRef}
               className="flex flex-col justify-start px-8 lg:px-12 pt-10 lg:py-12 space-y-8 lg:space-y-12 relative z-10 backdrop-blur-xl rounded-2xl border border-white/0 h-auto lg:h-[680px] transition-opacity duration-300"

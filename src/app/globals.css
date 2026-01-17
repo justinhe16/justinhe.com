@@ -29,6 +29,9 @@
   --background: #ffffff;
   --foreground: #171717;
 
+  /* Typography */
+  --line-height-content: 1.75;
+
   /* Theme Colors - Default (Green) */
   --theme-primary: #4CAF50;
   --theme-bg-1: #ffffff;
@@ -97,7 +100,7 @@
   --color-foreground: var(--foreground);
   --color-core-bg: #F7F7F7;
   --font-serif: var(--font-fraunces);
-  --font-sans: var(--font-google-sans-flex);
+  --font-sans: var(--font-schibsted-grotesk);
 }
 
 * {
@@ -124,7 +127,7 @@ p {
 
 /* Secondary font (Google Sans Flex) for UI elements */
 .font-sans {
-  font-family: var(--font-google-sans-flex), sans-serif;
+  font-family: var(--font-schibsted-grotesk), sans-serif;
 }
 
 /* Utility classes for specific use cases */
@@ -134,7 +137,7 @@ figcaption,
 .label,
 .metadata,
 .badge {
-  font-family: var(--font-google-sans-flex), sans-serif;
+  font-family: var(--font-schibsted-grotesk), sans-serif;
   font-weight: 400;
 }
 
@@ -209,4 +212,55 @@ svg path {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* Individual gradient layers - one for each theme */
+.gradient-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-size: 400% 400%;
+  animation: gradientShift 45s ease infinite;
+  transition: opacity 6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+/* Default (purple) gradient */
+.gradient-layer-default {
+  background-image: linear-gradient(-45deg, #ffffff, #f6f4fe, #eeebfe, #e5dffe, #f3efff, #ffffff);
+}
+
+/* Projects (blue) gradient */
+.gradient-layer-projects {
+  background-image: linear-gradient(-45deg, #ffffff, #eff8ff, #e0f2fe, #d0ebfe, #e5f4ff, #ffffff);
+}
+
+/* Blog (yellow) gradient */
+.gradient-layer-blog {
+  background-image: linear-gradient(-45deg, #ffffff, #fffbeb, #fef9c3, #fef6aa, #fffef0, #ffffff);
+}
+
+/* Hobbies (orange) gradient */
+.gradient-layer-hobbies {
+  background-image: linear-gradient(-45deg, #ffffff, #fff7ed, #ffedd5, #fee5c7, #fff9f0, #ffffff);
+}
+
+/* Show the active theme's gradient layer */
+body[data-theme="default"] .gradient-layer-default {
+  opacity: 1;
+}
+
+body[data-theme="projects"] .gradient-layer-projects {
+  opacity: 1;
+}
+
+body[data-theme="blog"] .gradient-layer-blog {
+  opacity: 1;
+}
+
+body[data-theme="hobbies"] .gradient-layer-hobbies {
+  opacity: 1;
 }

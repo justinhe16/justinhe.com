@@ -2,16 +2,19 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { blogsData } from '@/data/blogsData';
 import { useEffect, useRef } from 'react';
 import { animate } from 'animejs';
 import Header from '../../components/Header';
+import { useTheme } from '@/hooks/useTheme';
 
 export default function BlogDetailPage() {
   const params = useParams();
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const { switchTheme } = useTheme();
   const id = params.id as string;
 
   // Find the blog post by ID
@@ -21,6 +24,9 @@ export default function BlogDetailPage() {
   const isFirstLoad = typeof window !== 'undefined' && !sessionStorage.getItem('categoryPageLoaded');
 
   useEffect(() => {
+    // Set theme
+    switchTheme('blog');
+
     // Mark that we're in the category system
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('categoryPageLoaded', 'true');
@@ -103,20 +109,39 @@ export default function BlogDetailPage() {
           </div>
           <h1 className="text-2xl lg:text-4xl font-medium mb-4">{blogPost.title}</h1>
           <p className="text-gray-500 font-sans mb-8">{blogPost.date}</p>
-          <div className="prose prose-lg max-w-none text-gray-700 font-sans leading-relaxed">
+          <div className="prose prose-xl max-w-none text-gray-700 leading-loose">
             <ReactMarkdown
+              rehypePlugins={[rehypeRaw]}
               components={{
                 img: ({ node, ...props }) => (
                   <img {...props} className="rounded-lg my-8 w-full" alt={props.alt || ''} />
                 ),
+                video: ({ node, ...props }) => (
+                  <video {...props} className="rounded-lg my-8 w-full" controls />
+                ),
                 p: ({ node, ...props }) => (
-                  <p {...props} className="mb-4" />
+                  <p {...props} className="mb-4 font-sans text-lg" style={{ lineHeight: 'var(--line-height-content)' }} />
                 ),
                 h2: ({ node, ...props }) => (
-                  <h2 {...props} className="text-2xl font-medium mt-8 mb-4" />
+                  <h2 {...props} className="text-3xl font-bold mt-8 mb-4" />
                 ),
                 h3: ({ node, ...props }) => (
-                  <h3 {...props} className="text-xl font-medium mt-6 mb-3" />
+                  <h3 {...props} className="text-2xl font-bold mt-6 mb-3" />
+                ),
+                li: ({ node, ...props }) => (
+                  <li {...props} className="font-sans text-lg" style={{ lineHeight: 'var(--line-height-content)' }} />
+                ),
+                ul: ({ node, ...props }) => (
+                  <ul {...props} className="font-sans" />
+                ),
+                ol: ({ node, ...props }) => (
+                  <ol {...props} className="font-sans" />
+                ),
+                strong: ({ node, ...props }) => (
+                  <strong {...props} className="font-sans font-bold" />
+                ),
+                a: ({ node, ...props }) => (
+                  <a {...props} className="font-sans underline hover:no-underline" />
                 ),
               }}
             >

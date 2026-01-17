@@ -42,4 +42,13 @@ export const hobbiesData: HobbyCardData[] = [
     imageUrl: '/angels-landing.png',
     videoUrl: '/rock-climbing-dyno.mov',
   },
+  {
+    id: 'hobby-pssc-wave',
+    category: 'hobby',
+    width: '1x',
+    height: '2x',
+    activity: 'PSSC Wave Pool, c. 2024',
+    imageUrl: '/mentawai-surfing.jpg',
+    videoUrl: '/pssc_wave.mp4',
+  },
 ];

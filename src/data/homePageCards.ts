@@ -20,6 +20,7 @@ const homePageCardIds = [
   'project-claude-surf',
   'hobby-palm-trees',
   'hobby-rock-climbing-dyno',
+  'hobby-pssc-wave',
 ];
 
 // Get the actual card data for homepage

@@ -38,6 +38,7 @@ const themeColors: Record<Theme, ThemeColors> = {
 
 export function useTheme() {
   const switchTheme = useCallback((theme: Theme) => {
+    console.log('🎨 switchTheme called with:', theme);
     const colors = themeColors[theme];
     const root = document.documentElement;
 
@@ -46,6 +47,11 @@ export function useTheme() {
     root.style.setProperty('--theme-bg-2', colors.bg2);
     root.style.setProperty('--theme-signature', colors.signature);
     root.style.setProperty('--theme-primary', colors.primary);
+
+    // Set data-theme attribute for gradient transitions
+    document.body.setAttribute('data-theme', theme);
+    console.log('🎨 data-theme attribute set to:', document.body.getAttribute('data-theme'));
+    console.log('🎨 Gradient element exists:', !!document.querySelector('.gradient-background-transition'));
   }, []);
 
   const getThemeColor = useCallback((theme: Theme) => {

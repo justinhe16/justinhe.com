@@ -22,16 +22,6 @@ export default function TriggerWord({ trigger, children, showUnderline = true }:
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Tailwind color references (rgb values for SVG):
-  // blue-500: rgb(59, 130, 246) -> %233b82f6
-  // blue-400: rgb(96, 165, 250) -> %2360a5fa
-  // red-400: rgb(248, 113, 113) -> %23f87171
-  // amber-500: rgb(245, 158, 11) -> %23f59e0b
-  // purple-500: rgb(168, 85, 247) -> %23a855f7
-  // green-500: rgb(34, 197, 94) -> %2322c55e
-  // pink-500: rgb(236, 72, 153) -> %23ec4899
-  // cyan-500: rgb(6, 182, 212) -> %2306b6d4
-
   // Get link for each trigger
   const getLink = () => {
     switch (trigger) {
@@ -54,64 +44,29 @@ export default function TriggerWord({ trigger, children, showUnderline = true }:
     }
   };
 
-  // Different underline styles and colors for each word
-  const getUnderlineStyle = () => {
+  // Different highlighter colors for each word
+  const getHighlighterColor = () => {
     switch (trigger) {
       case 'building':
-        return {
-          backgroundImage: 'linear-gradient(120deg, rgb(59, 130, 246) 0%, rgb(59, 130, 246) 100%)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 2px',
-          backgroundPosition: '0 100%',
-        };
+        return 'rgba(59, 130, 246, 0.3)'; // blue
       case 'dori':
-        return {
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 4\'%3E%3Cpath fill=\'none\' stroke=\'%2360a5fa\' stroke-width=\'2\' d=\'M0,2 L4,2 M6,2 L10,2 M12,2 L16,2 M18,2 L20,2\'/%3E%3C/svg%3E")',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'bottom',
-          backgroundSize: '20px 4px',
-        };
+        return 'rgba(96, 165, 250, 0.35)'; // lighter blue
       case 'travel':
-        return {
-          backgroundImage: 'linear-gradient(120deg, rgb(236, 72, 153) 0%, rgb(236, 72, 153) 100%)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 2px',
-          backgroundPosition: '0 100%',
-        };
+        return 'rgba(236, 72, 153, 0.3)'; // pink
       case 'foraging-frames':
-        return {
-          backgroundImage: 'linear-gradient(120deg, rgb(168, 85, 247) 0%, rgb(168, 85, 247) 100%)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 3px',
-          backgroundPosition: '0 100%',
-        };
+        return 'rgba(168, 85, 247, 0.3)'; // purple
       case 'surfing':
-        return {
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 4\'%3E%3Cpath fill=\'none\' stroke=\'%23f87171\' stroke-width=\'2\' d=\'M0,2 Q5,0 10,2 T20,2\'/%3E%3C/svg%3E")',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'bottom',
-          backgroundSize: '20px 4px',
-        };
+        return 'rgba(248, 113, 113, 0.35)'; // red
       case 'rock-climbing':
-        return {
-          backgroundImage: 'linear-gradient(120deg, rgb(245, 158, 11) 0%, rgb(245, 158, 11) 100%)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100% 2px',
-          backgroundPosition: '0 100%',
-        };
+        return 'rgba(245, 158, 11, 0.35)'; // amber
       case 'write':
-        return {
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 4\'%3E%3Cpath fill=\'none\' stroke=\'%2322c55e\' stroke-width=\'1.5\' d=\'M0,3 C2,1 3,1 5,3 C7,1 8,1 10,3 C12,1 13,1 15,3 C17,1 18,1 20,3\'/%3E%3C/svg%3E")',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'bottom',
-          backgroundSize: '20px 4px',
-        };
+        return 'rgba(34, 197, 94, 0.3)'; // green
       default:
-        return {};
+        return 'transparent';
     }
   };
 
-  const underlineStyle = getUnderlineStyle();
+  const highlighterColor = getHighlighterColor();
   const link = getLink();
 
   const handleClick = (e: React.MouseEvent) => {
@@ -132,20 +87,16 @@ export default function TriggerWord({ trigger, children, showUnderline = true }:
 
   return (
     <span
-      className="font-semibold cursor-pointer inline-block relative transition-transform duration-300 hover:-translate-y-1"
+      className="font-semibold cursor-pointer inline-block relative transition-transform duration-300 hover:-translate-y-1 px-1 -mx-1"
       onMouseEnter={() => !isMobile && setActiveTrigger(trigger)}
       onMouseLeave={() => !isMobile && setActiveTrigger(null)}
       onClick={handleClick}
+      style={{
+        backgroundColor: showUnderline ? highlighterColor : 'transparent',
+        transition: 'background-color 0.6s ease, transform 0.3s ease',
+      }}
     >
       {children}
-      <span
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          ...underlineStyle,
-          opacity: showUnderline ? 1 : 0,
-          transition: 'opacity 0.6s ease',
-        }}
-      />
     </span>
   );
 }

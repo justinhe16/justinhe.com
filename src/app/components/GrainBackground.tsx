@@ -32,7 +32,8 @@ export default function GrainBackground() {
     <div
       id="grain-container"
       ref={containerRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 bg-core-bg"
+      className="fixed top-0 left-0 w-full h-full"
+      style={{ zIndex: -1 }}
     />
   );
 }

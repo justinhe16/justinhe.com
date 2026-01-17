@@ -25,25 +25,21 @@ function HobbiesContent() {
     if (hasMountedRef.current) return;
     hasMountedRef.current = true;
 
-    console.log('🟢 Hobbies page useEffect running (ONCE)');
-
     // Set theme on mount
+    console.log('🎨 Hobbies page setting theme to hobbies');
     switchTheme('hobbies');
 
     // Only animate header on first load (coming from home)
     const isFirstCategoryPageLoad = !sessionStorage.getItem('categoryPageLoaded');
-    console.log('🟢 isFirstCategoryPageLoad:', isFirstCategoryPageLoad);
 
     // Set up header visibility
     if (headerRef.current) {
       if (isFirstCategoryPageLoad) {
-        console.log('🟢 ANIMATING HEADER (first load)');
         sessionStorage.setItem('categoryPageLoaded', 'true');
 
         // Animate header in
         setTimeout(() => {
           if (headerRef.current) {
-            console.log('🟢 Starting header animation');
             animate(headerRef.current, {
               opacity: [0, 1],
               translateY: [-20, 0],
@@ -53,7 +49,6 @@ function HobbiesContent() {
           }
         }, 200);
       } else {
-        console.log('🟢 SHOWING HEADER IMMEDIATELY (not first load)');
         // Not first load - show immediately without animation
         headerRef.current.style.opacity = '1';
         headerRef.current.style.transform = 'translateY(0)';
@@ -62,10 +57,8 @@ function HobbiesContent() {
 
     // Animate content
     if (contentRef.current) {
-      console.log('🟢 Starting content animation with delay:', isFirstCategoryPageLoad ? 400 : 0);
       setTimeout(() => {
         if (contentRef.current) {
-          console.log('🟢 Executing content animation');
           animate(contentRef.current, {
             opacity: [0, 1],
             translateY: [20, 0],
@@ -127,18 +120,25 @@ function HobbiesContent() {
 
       <div className="min-h-screen relative">
         <div className="max-w-7xl mx-auto px-8 lg:px-16">
-          <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-4 gap-8 pt-16 lg:pt-32 pb-12 lg:pb-24 opacity-0">
+          <div ref={contentRef} className="grid grid-cols-1 lg:grid-cols-4 gap-8 pt-20 lg:pt-32 pb-12 lg:pb-24 opacity-0">
           {/* Left Column - Description Card (1 column on desktop, full width on mobile) */}
           <div className="lg:col-span-1">
             <div
-              className="backdrop-blur-xl rounded-lg p-6 lg:p-8 h-full flex flex-col justify-center"
+              className="backdrop-blur-xl rounded-lg p-6 lg:p-8 flex flex-col justify-center"
               style={{
-                background: 'linear-gradient(135deg, var(--card-hobby-light) 0%, var(--card-hobby-mid) 50%, var(--card-hobby-light) 100%)',
+                background: 'linear-gradient(135deg, var(--card-glass-light) 0%, var(--card-glass-mid) 50%, var(--card-glass-light) 100%)',
               }}
             >
-              <h2 className="text-3xl lg:text-4xl font-medium mb-4">Hobbies</h2>
+              <h2
+                className="text-3xl lg:text-4xl font-medium mb-4 px-2 -mx-2"
+                style={{
+                  backgroundColor: 'rgba(238, 97, 35, 0.3)',
+                }}
+              >
+                Hobbies
+              </h2>
               <p className="text-sm lg:text-base text-gray-800 font-sans">
-                Things I love doing in my free time
+                A hodgepodge of activites that grant me joy
               </p>
             </div>
           </div>

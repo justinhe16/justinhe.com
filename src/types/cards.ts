@@ -22,7 +22,10 @@ export interface ProjectCardData {
   height: CardHeight;
   title: string;
   caption: string;
+  date?: string; // Optional date for the project
+  contentPreview?: string; // Preview text for card hover
   imageUrl: string;
+  content?: string; // Full markdown content for detail page
   hasDetailPage?: boolean; // If true, routes to /projects/{id}, otherwise to /projects
 }
 

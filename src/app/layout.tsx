@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Google_Sans_Flex } from "next/font/google";
+import { Fraunces, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./components/ClientLayout";
 
@@ -10,9 +10,9 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const googleSansFlex = Google_Sans_Flex({
+const schibstedGrotesk = Schibsted_Grotesk({
   subsets: ["latin"],
-  variable: "--font-google-sans-flex",
+  variable: "--font-schibsted-grotesk",
   display: "swap",
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fraunces.variable} ${googleSansFlex.variable} antialiased`}>
+      <body className={`${fraunces.variable} ${schibstedGrotesk.variable} antialiased`} data-theme="default">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
