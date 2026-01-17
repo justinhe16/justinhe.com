@@ -54,9 +54,12 @@ Check out Claude Surf on [GitHub](https://github.com/justinhe16/claude-surf) to 
 
 <img src="/miu-custom-site.png" alt="Miu's Custom Website Screenshot" style="width: 100%; border-radius: 0.5rem; margin: 2rem 0;" />
 
+**Check out the website here, at [miuyoshino.com](https://www.miuyoshino.com)**
+
 ## Overview
 
-This project was a fun dynamic front-end challenge - building a custom personal website with unique, playful interactions that feel more like a creative canvas than a traditional portfolio site.
+This project was a fun dynamic front-end challenge for Miu! Miu, a product designer, sent me the Figma files and told me to go wild with the interactive features.
+I used anime.js as the primary library to enable a creative canvas feel rather than a traditional portfolio website.
 
 ## Key Features
 
@@ -65,8 +68,7 @@ This project was a fun dynamic front-end challenge - building a custom personal 
 **Scrapbook-like Interactions** - Created an intimate, tactile browsing experience where content feels like physical objects you can interact with, shuffle, and explore organically.
 
 **Audio Integration** - Embedded audio elements that enhance the atmospheric and personal nature of the site, adding another layer of engagement beyond visual interactions.
-
-The project pushed the boundaries of traditional web interactions, prioritizing playfulness and creativity over conventional navigation patterns.`,
+`,
     hasDetailPage: true,
   },
 ];
