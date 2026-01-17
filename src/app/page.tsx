@@ -111,7 +111,7 @@ function HomeContent() {
       }
 
       // Use splitText to split intro text into words
-      const introTextElement = leftContentRef.current?.querySelector('.intro-text');
+      const introTextElement = leftContentRef.current?.querySelector('.intro-text') as HTMLElement | null;
       if (introTextElement) {
         const { words } = splitText(introTextElement, {
           words: true,
@@ -156,7 +156,7 @@ function HomeContent() {
     const cards = rightContentRef.current.querySelectorAll('.spotlight-card');
 
     // Find the first triggered card based on activeTrigger
-    let firstTriggeredCard: Element | null = null;
+    let firstTriggeredCard: HTMLElement | null = null;
 
     cards.forEach((card) => {
       const cardElement = card as HTMLElement;
@@ -175,13 +175,14 @@ function HomeContent() {
         (activeTrigger === 'write' && category === 'blog');
 
       if (shouldScroll && !firstTriggeredCard) {
-        firstTriggeredCard = card;
+        firstTriggeredCard = card as HTMLElement;
       }
     });
 
     // Scroll to the first triggered card
-    if (firstTriggeredCard) {
-      const cardRect = firstTriggeredCard.getBoundingClientRect();
+    if (firstTriggeredCard !== null) {
+      const cardElement: HTMLElement = firstTriggeredCard;
+      const cardRect = cardElement.getBoundingClientRect();
 
       // Calculate scroll position relative to the page
       const scrollTop = window.scrollY + cardRect.top - 150;

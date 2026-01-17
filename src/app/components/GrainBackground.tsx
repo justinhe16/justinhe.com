@@ -8,7 +8,7 @@ export default function GrainBackground() {
   useEffect(() => {
     if (containerRef.current && typeof window !== 'undefined') {
       // Dynamically import grained to avoid SSR issues
-      import('grained').then((module: any) => {
+      import('grained').then((module) => {
         const grained = module.default || module;
 
         if (typeof grained === 'function') {
