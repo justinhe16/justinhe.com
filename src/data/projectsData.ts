@@ -40,4 +40,33 @@ The paradigm is simple: babysit the complex stuff with solo-surf, fire-and-forge
 Check out Claude Surf on [GitHub](https://github.com/justinhe16/claude-surf) to get started, file issues, or contribute to the project.`,
     hasDetailPage: true,
   },
+  {
+    id: 'project-miu-custom-site',
+    category: 'project',
+    width: '1x',
+    height: '1x',
+    title: "Miu's Custom Website",
+    caption: 'A playful, interactive personal site',
+    date: 'December 2024',
+    contentPreview: 'A dynamic front-end experience featuring Figma-esque movement, scrapbook interactions, and audio.',
+    imageUrl: '/miu-custom-site.png',
+    content: `
+
+<img src="/miu-custom-site.png" alt="Miu's Custom Website Screenshot" style="width: 100%; border-radius: 0.5rem; margin: 2rem 0;" />
+
+## Overview
+
+This project was a fun dynamic front-end challenge - building a custom personal website with unique, playful interactions that feel more like a creative canvas than a traditional portfolio site.
+
+## Key Features
+
+**Figma-esque Movement** - Implemented drag-and-drop functionality allowing elements to be freely positioned and moved around the canvas, giving users full creative control over the layout.
+
+**Scrapbook-like Interactions** - Created an intimate, tactile browsing experience where content feels like physical objects you can interact with, shuffle, and explore organically.
+
+**Audio Integration** - Embedded audio elements that enhance the atmospheric and personal nature of the site, adding another layer of engagement beyond visual interactions.
+
+The project pushed the boundaries of traditional web interactions, prioritizing playfulness and creativity over conventional navigation patterns.`,
+    hasDetailPage: true,
+  },
 ];
