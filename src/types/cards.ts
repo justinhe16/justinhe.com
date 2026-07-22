@@ -15,6 +15,12 @@ export interface BlogCardData {
   hasDetailPage?: boolean; // If true, routes to /blog/{id}, otherwise to /blog
 }
 
+export interface ProjectChapter {
+  title: string; // Chapter heading shown in the collapsible summary
+  summary?: string; // Optional one-line description under the title
+  content: string; // Markdown body for this chapter
+}
+
 export interface ProjectCardData {
   id: string;
   category: 'project';
@@ -25,7 +31,8 @@ export interface ProjectCardData {
   date?: string; // Optional date for the project
   contentPreview?: string; // Preview text for card hover
   imageUrl: string;
-  content?: string; // Full markdown content for detail page
+  content?: string; // Full markdown content for detail page (intro if chapters are present)
+  chapters?: ProjectChapter[]; // Optional collapsible chapters rendered below the intro
   hasDetailPage?: boolean; // If true, routes to /projects/{id}, otherwise to /projects
 }
 

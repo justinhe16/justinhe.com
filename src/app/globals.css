@@ -26,8 +26,13 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── v2 "Deep Research" palette (see VERSIONS.md) ── */
+  --alabaster: #EAE3DD; /* background */
+  --carbon: #222222;    /* text */
+  --wisteria: #758ECD;  /* hover / highlight */
+
+  --background: #EAE3DD;
+  --foreground: #222222;
 
   /* Typography */
   --line-height-content: 1.75;
@@ -111,9 +116,171 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background-color: var(--alabaster);
+  color: var(--carbon);
   font-family: var(--font-fraunces), serif;
   font-weight: 300;
   line-height: 1.3;
+}
+
+/* Wisteria text-selection highlight, sitewide */
+::selection {
+  background: var(--wisteria);
+  color: var(--alabaster);
+}
+
+/* ── v2 plain-site building blocks ── */
+
+/* Small uppercase section label (research-index style) */
+.section-label {
+  font-family: var(--font-schibsted-grotesk), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--carbon) 55%, transparent);
+}
+
+/* Text link that goes wisteria on hover */
+.wisteria-link {
+  color: var(--carbon);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.wisteria-link:hover {
+  color: var(--wisteria);
+}
+
+/* Pill / bubble link */
+.bubble-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-schibsted-grotesk), sans-serif;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--carbon) 25%, transparent);
+  color: var(--carbon);
+  text-decoration: none;
+  transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+.bubble-link:hover {
+  color: var(--alabaster);
+  background-color: var(--wisteria);
+  border-color: var(--wisteria);
+}
+
+/* Comparison tables in articles */
+.cmp-wrap {
+  overflow-x: auto;
+  margin: 1.75rem 0;
+}
+.cmp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-schibsted-grotesk), sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+.cmp-table th,
+.cmp-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 1rem 0.7rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--carbon) 12%, transparent);
+}
+.cmp-table thead th {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--carbon) 50%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--carbon) 26%, transparent);
+}
+.cmp-table td:first-child {
+  color: color-mix(in srgb, var(--carbon) 55%, transparent);
+  white-space: nowrap;
+  padding-right: 1.25rem;
+}
+.cmp-table .mine {
+  color: var(--wisteria);
+}
+
+/* Inline architecture diagrams */
+.diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.diagram text {
+  font-family: var(--font-schibsted-grotesk), sans-serif;
+  fill: var(--carbon);
+}
+.diagram .d-box {
+  fill: none;
+  stroke: color-mix(in srgb, var(--carbon) 30%, transparent);
+  stroke-width: 1;
+}
+.diagram .d-accent {
+  stroke: var(--wisteria);
+}
+.diagram .d-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--carbon) 32%, transparent);
+  stroke-width: 1;
+}
+.diagram .d-arrow {
+  fill: color-mix(in srgb, var(--carbon) 32%, transparent);
+}
+.diagram .d-main {
+  font-size: 12px;
+}
+.diagram .d-sub {
+  font-size: 10px;
+  fill: color-mix(in srgb, var(--carbon) 55%, transparent);
+}
+.diagram .d-stage {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  fill: color-mix(in srgb, var(--carbon) 45%, transparent);
+}
+.diagram .d-hl {
+  fill: var(--wisteria);
+}
+
+/* Collapsible article chapters */
+.chapter {
+  border-top: 1px solid color-mix(in srgb, var(--carbon) 14%, transparent);
+}
+.chapter:last-of-type {
+  border-bottom: 1px solid color-mix(in srgb, var(--carbon) 14%, transparent);
+}
+.chapter > summary {
+  list-style: none;
+}
+.chapter > summary::-webkit-details-marker {
+  display: none;
+}
+.chapter-chevron {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.chapter[open] .chapter-chevron {
+  transform: rotate(90deg);
+}
+
+/* Article body links */
+.article-prose a {
+  color: var(--carbon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.18s ease;
+}
+.article-prose a:hover {
+  color: var(--wisteria);
 }
 
 h1, h2, h3, h4, h5, h6 {
