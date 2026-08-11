@@ -4,11 +4,17 @@
 
 ## Blog
 
-- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a tech job to pursue entrepreneurship and self-directed projects.
+- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a stable tech job to pursue entrepreneurship and self-directed projects.
 
 ## Other
 
-- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that automates software development with composable agents and Linear integration.
-- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice guide explaining color wheels, dimensions, harmony schemes, and perceptual color spaces for design.
+- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that streamlines autonomous software development with agents and workflows.
+- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice note on color theory covering wheels, dimensions, harmony schemes, and perceptual color spaces.
 - [History of Martian Ideas](https://www.justinhe.com/b): Two centuries of human imagination about Martians, from canal theories to modern spacecraft discoveries.
 - [The Shipping Container](https://www.justinhe.com/c): How standardized steel containers revolutionized global trade and enabled modern globalization economics.
+- [Sourdough Science and Practice](https://www.justinhe.com/d): Detailed explanation of sourdough starter microbiology, fermentation chemistry, and baking techniques.
+- [Ancient Eclipse Predicting Device](https://www.justinhe.com/e): Ancient Greek geared calculator from 150-100 BCE that predicted eclipses and tracked celestial movements.
+- [Songbird Vocal Learning Mechanisms](https://www.justinhe.com/f): Songbirds learn vocalizations through sensory and sensorimotor phases, requiring auditory feedback and critical developmental periods.
+- [Map Projections Explained](https://www.justinhe.com/g): Why every flat map distorts Earth, what projections preserve, and which ones we use today.
+- [Bioluminescence Chemistry and Biology](https://www.justinhe.com/h): Explores cold light chemistry, deep-sea camouflage strategies, and bioluminescent organisms' evolutionary innovations.
+- [Roman Concrete Durability](https://www.justinhe.com/i): Why Roman concrete structures survive millennia while modern concrete fails faster through superior material chemistry.
