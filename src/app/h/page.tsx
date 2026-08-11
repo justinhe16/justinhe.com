@@ -75,7 +75,7 @@ export default function PageH() {
       </div>
 
       <nav className="mt-14 flex gap-3">
-        <Link href="/i" className="bubble-link">Next: I</Link>
+        <Link href="/z" className="bubble-link">Next: Z</Link>
         <Link href="/g" className="bubble-link">G</Link>
       </nav>
     </main>
