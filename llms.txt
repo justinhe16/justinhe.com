@@ -4,11 +4,19 @@
 
 ## Blog
 
-- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a tech job to pursue entrepreneurship and self-directed projects.
+- [Leaving Tech Job for Entrepreneurship](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a stable tech job to pursue entrepreneurial ambitions and build something meaningful.
 
 ## Other
 
-- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that automates software development with composable agents and Linear integration.
-- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice guide explaining color wheels, dimensions, harmony schemes, and perceptual color spaces for design.
+- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that streamlines autonomous software development with integrated agents and workflows.
+- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice note on color theory principles including wheels, harmony schemes, and perceptual color spaces.
 - [History of Martian Ideas](https://www.justinhe.com/b): Two centuries of human imagination about Martians, from canal theories to modern spacecraft discoveries.
-- [The Shipping Container](https://www.justinhe.com/c): How standardized steel containers revolutionized global trade and enabled modern globalization economics.
+- [The Shipping Container's Impact](https://www.justinhe.com/c): How standardized containers revolutionized global trade, displaced dock workers, and enabled modern globalization economics.
+- [Sourdough Science and Practice](https://www.justinhe.com/d): Detailed guide to sourdough fermentation, microbial symbiosis, acid development, and baking chemistry.
+- [Ancient Eclipse Predicting Device](https://www.justinhe.com/e): Ancient Greek geared calculator from 150-100 BCE that predicted eclipses and tracked celestial cycles.
+- [Songbird Vocal Learning Neuroscience](https://www.justinhe.com/f): How songbirds learn to sing through critical periods, auditory feedback, and neural circuits similar to human speech development.
+- [Map Projections Explained](https://www.justinhe.com/g): Why every flat map distorts Earth, what projections preserve, and Web Mercator's dominance.
+- [Bioluminescence Chemistry and Biology](https://www.justinhe.com/h): Explores cold light chemistry, deep-sea camouflage strategies, and biological applications of glowing organisms.
+- [Pokémon's Origins and Development](https://www.justinhe.com/x): How a Tokyo boy's insect collecting inspired the world's highest-grossing media franchise through six years of development.
+- [Pokémon Competitive Metagame](https://www.justinhe.com/y): How players built Pokémon's competitive ruleset through datamining and community innovation.
+- [Pokémon Red Blue Generation One Glitches](https://www.justinhe.com/z): Exploration of famous bugs in Pokémon Red and Blue including MissingNo., the truck myth, and the Mew glitch.
