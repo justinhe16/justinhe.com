@@ -77,8 +77,8 @@ export default function PageC() {
       </div>
 
       <nav className="mt-14 flex gap-3">
-        <Link href="/a" className="bubble-link">
-          A
+        <Link href="/d" className="bubble-link">
+          Next: D
         </Link>
         <Link href="/b" className="bubble-link">
           B
