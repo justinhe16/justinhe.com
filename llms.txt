@@ -4,11 +4,17 @@
 
 ## Blog
 
-- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a tech job to pursue entrepreneurship and self-directed projects.
+- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a stable tech job to pursue independent projects and adventures.
 
 ## Other
 
-- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that automates software development with composable agents and Linear integration.
-- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice guide explaining color wheels, dimensions, harmony schemes, and perceptual color spaces for design.
-- [History of Martian Ideas](https://www.justinhe.com/b): Two centuries of human imagination about Martians, from canal theories to modern spacecraft discoveries.
+- [Claude Surf AI Development](https://www.justinhe.com/projects/project-claude-surf): AI-powered orchestrator for autonomous software development using Claude agents and Linear integration
+- [Color Theory Guide](https://www.justinhe.com/a): Practice note on color theory principles, harmony schemes, and perceptual color spaces for design.
+- [Martian Ideas Through History](https://www.justinhe.com/b): Two centuries of human imagination about Martians, from canal theories to modern spacecraft discoveries.
 - [The Shipping Container](https://www.justinhe.com/c): How standardized steel containers revolutionized global trade and enabled modern globalization economics.
+- [Sourdough Science and Practice](https://www.justinhe.com/d): Explores sourdough starter microbiology, fermentation chemistry, and baking techniques comprehensively.
+- [Ancient Eclipse Predicting Device](https://www.justinhe.com/e): Ancient Greek geared calculator from 150-100 BCE that predicted eclipses and tracked celestial movements.
+- [Songbird Vocal Learning Mechanisms](https://www.justinhe.com/f): How songbirds learn to sing through sensory and sensorimotor phases, auditory feedback, critical periods, and neural circuitry.
+- [Map Projections Explained](https://www.justinhe.com/g): Why every flat map distorts Earth, what projections preserve, and why Web Mercator dominates online maps.
+- [Bioluminescence Chemistry and Deep Ocean Light](https://www.justinhe.com/h): Explores the chemistry of bioluminescence, how deep-sea animals produce cold light, and its biological applications.
+- [Roman Concrete Durability](https://www.justinhe.com/i): Why Roman concrete structures survive millennia while modern concrete fails, exploring volcanic ash chemistry and self-healing mechanisms.
