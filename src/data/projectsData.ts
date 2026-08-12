@@ -10,6 +10,65 @@ import { ProjectCardData } from '@/types/cards';
  */
 export const projectsData: ProjectCardData[] = [
   {
+    id: 'project-fantasy-idl',
+    category: 'project',
+    width: '1x',
+    height: '1x',
+    title: 'Fantasy IDL',
+    caption: 'A live prediction game for a dance-crew competition',
+    date: 'February 2026',
+    contentPreview:
+      'A two-phase prediction game for a live dance-crew competition, built on FastAPI, Next.js, and Supabase — where the hard part was keeping scores honest under live data entry.',
+    imageUrl: '/fantasy-idl.png',
+    content: `
+
+<img src="/fantasy-idl.png" alt="Fantasy IDL — Predict the IDL, climb the board" style="width: 100%; border-radius: 0.5rem; margin: 2rem 0;" />
+
+## Overview
+
+**Fantasy IDL is a prediction game for a live dance-crew competition.** Six real crews — Brotherhood (Vancouver), Royal Family (Auckland), Jam Republic (Singapore), GRV (LA), 1MILLION (Seoul), and Quick Style (Oslo) — go head to head, and fans call the results before they happen.
+
+Each event runs in two stages. In the first, crews battle 1v1 in front of a seven-judge panel, and you predict the vote split — a 5–2 that lands 6–1 still costs you. In the second, the survivors compete for the top three places with point scores, and you call who makes it and where they land.
+
+You earn points two ways: for getting the winner or rank right, and for how close your margin was. Those scores feed per-event and all-time leaderboards, and you can start a private league to compare with friends. During an event, an admin enters judge results live from a control room while everyone watching sees the board move over SSE.
+
+## Architecture
+
+Browser (Next.js) → a Next.js BFF on Vercel → FastAPI on Fly.io → Supabase Postgres.
+
+The browser never calls the API directly. The Next.js layer reads the Supabase session from HTTP-only cookies on the server, attaches the JWT, and forwards the request — so the backend URL stays private and no token ever reaches client JavaScript. FastAPI checks those tokens against Supabase's JWKS, and a user's role lives in the app database rather than in the auth provider.
+
+Most of what follows wasn't algorithmic. It was keeping a live-scored game honest and consistent while an admin types in results in real time.
+
+## One scoring path, reused everywhere
+
+Scores show up in four places: the stored leaderboard cache, the live in-progress board, a player's own results page, and the "top scorer" badge on the events list. The moment one of those computes a score differently, someone sees two numbers for the same pick. So they all run through a single set of helpers, a test pins them together, and the internal score records carry their own matchup and team ids — nothing depends on two queries coming back in the same order.
+
+## You can't predict the past
+
+Picks stay editable until lock, and results go in as battles finish, which leaves an obvious hole: predicting something that already happened. Every scoring path drops any prediction created after the result it's being measured against. That check sits in three different code paths, each with a comment reminding you to keep the other two in step.
+
+## Only one event runs at a time
+
+The live experience assumes a single active event, so three things guard it. The app takes a row lock (SELECT … FOR UPDATE) before flipping status, a small state machine only allows upcoming → in-progress → completed, and a partial unique index in Postgres makes a second in-progress row impossible at the database level. When that index rejects a write, the error is caught and returned as a plain 400 instead of a stack trace.
+
+## Ranking with ties
+
+Leaderboards get subtle once ties meet pagination. Ranks are worked out over the whole sorted field and then sliced in Python — not with SQL OFFSET/LIMIT — so a tie doesn't move depending on which page you're on, and they follow standard competition ranking (1, 1, 1, 4…). Reads are tiered: upcoming events skip scoring entirely, live events read the cache, and the fallback batch-loads in a few queries instead of one per user.
+
+## Finals that follow your picks
+
+Which crews are eligible for finals depends on who you picked to win their matchups. Change a matchup and the old winner's finals row would hang around as a phantom fourth finalist — so after each bulk save the server recomputes the winners and deletes finals rows for crews you no longer have advancing. Rank is recalculated from the points you entered; the client's version is never trusted.
+
+## The live board
+
+Updates ride on Server-Sent Events. One manager maps each event to its set of subscriber queues, and those queues are capped and drop frames for slow clients so a single stalled tab can't run memory away. The BFF relays the upstream stream through a ReadableStream with a hard 30-minute cutoff to avoid leaking connections, and the browser reconnects with backoff.
+
+None of this is hard on its own. Put it under a live event with people watching and "simple" turns into making every number agree, closing the door on hindsight picks, and holding the one-event rule through a race.
+`,
+    hasDetailPage: true,
+  },
+  {
     id: 'project-claude-surf',
     category: 'project',
     width: '1x',

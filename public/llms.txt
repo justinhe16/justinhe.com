@@ -1,8 +1,8 @@
 # Justin He
 
-> Personal site of Justin He — engineer, founder of dori, previously Valon and DoorDash. The site holds a short project index, occasional writing, hobbies, and a few standalone practice notes.
+> Personal site of Justin He — engineer, founder of dori, previously Valon and DoorDash. The site holds a short project index, occasional writing, and hobbies.
 
-The homepage is a plain single-page index. Project, blog, and hobby entries live at `/projects/<id>`, `/blog/<id>`, and `/hobbies/<id>`. Pages A, B, and C are self-contained practice essays, unrelated to the rest of the site.
+The homepage is a plain single-page index. Project, blog, and hobby entries live at `/projects/<id>`, `/blog/<id>`, and `/hobbies/<id>`.
 
 ## Main
 
@@ -10,12 +10,6 @@ The homepage is a plain single-page index. Project, blog, and hobby entries live
 - [Projects](https://justinhe.com/projects): Things built, with short captions and dates.
 - [Blog](https://justinhe.com/blog): Occasional writing.
 - [Hobbies](https://justinhe.com/hobbies): Surfing, climbing, and photos from elsewhere.
-
-## Practice notes
-
-- [A — Color Theory](https://justinhe.com/a): The color wheel, the three dimensions of color, harmony schemes, and why perceptual color spaces beat raw RGB interpolation.
-- [B — A History of Martians](https://justinhe.com/b): Martians as an idea — Schiaparelli's canals, Lowell, Wells and Bradbury, the Face on Mars, and what spacecraft actually found.
-- [C — The Shipping Container](https://justinhe.com/c): How a standardized steel box rearranged world trade, emptied the working waterfront, and made globalization cheap.
 
 ## Optional
 

@@ -13,10 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/projects', priority: 0.8 },
     { path: '/blog', priority: 0.8 },
     { path: '/hobbies', priority: 0.8 },
-    ...['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'z', 'y', 'x'].map((letter) => ({
-      path: `/${letter}`,
-      priority: 0.5,
-    })),
   ].map(({ path, priority }) => ({
     url: `${BASE_URL}${path}`,
     lastModified,
