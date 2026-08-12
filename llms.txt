@@ -8,7 +8,15 @@
 
 ## Other
 
-- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that automates software development with composable agents and Linear integration.
-- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice guide explaining color wheels, dimensions, harmony schemes, and perceptual color spaces for design.
+- [Claude Surf AI Development Orchestrator](https://www.justinhe.com/projects/project-claude-surf): AI-powered tool orchestrating autonomous software development with Claude, integrating Linear tickets and Git workflows.
+- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice guide explaining color wheels, harmony schemes, perceptual spaces, and design principles.
 - [History of Martian Ideas](https://www.justinhe.com/b): Two centuries of human imagination about Martians, from canal theories to modern spacecraft discoveries.
 - [The Shipping Container](https://www.justinhe.com/c): How standardized steel containers revolutionized global trade and enabled modern globalization economics.
+- [Sourdough Science and Practice](https://www.justinhe.com/d): Detailed explanation of sourdough starter microbiology, fermentation chemistry, and baking techniques.
+- [Ancient Eclipse Predicting Device](https://www.justinhe.com/e): Ancient Greek geared calculator from 150-100 BCE that predicted eclipses and tracked celestial cycles.
+- [Songbird Vocal Learning Neuroscience](https://www.justinhe.com/f): How songbirds learn to sing through sensory and sensorimotor phases, with neural circuits and parallels to human speech development.
+- [Map Projections Explained](https://www.justinhe.com/g): Why every flat map distorts Earth, what different projections preserve, and why Web Mercator dominates online maps.
+- [Bioluminescence Chemistry and Biology](https://www.justinhe.com/h): Explores cold light chemistry, deep-sea camouflage, and how jellyfish proteins revolutionized biological research.
+- [Pokémon's Origins and Development](https://www.justinhe.com/x): How a Tokyo suburban bug collector's childhood inspired the world's highest-grossing media franchise through six years of development.
+- [Competitive Pokémon Metagame](https://www.justinhe.com/y): How players built a complex competitive ruleset for Pokémon through datamining and community organization.
+- [Pokémon Red Blue Generation One Glitches](https://www.justinhe.com/z): Exploration of famous bugs in Pokémon Red and Blue including MissingNo., the truck myth, and the Mew glitch.
