@@ -28,8 +28,6 @@ export const projectsData: ProjectCardData[] = [
 
 **Claude Surf is an opinionated orchestrator for Claude Code**, built around a simple split: babysit the complex work, fire-and-forget the straightforward work.
 
-\`/solo-surf\` handles the first case — it spins up an isolated git worktree and opens a fresh Claude session in a new terminal so you can implement and course-correct alongside it. \`/robot-surf\` handles the second: hand it a Linear ticket and it plans, implements, runs the repo's own lint and test gates, opens a PR, and works the review loop on its own. \`/linear-surf\` sits in front of both, turning a one-line idea into scoped tickets with explicit dependencies, and \`/robot-surf-fan\` sorts those tickets into waves and runs them in parallel.
-
 It's a small tool built for my own workflow — the interesting part isn't the code, it's what falls out of moving from *writing code* to *reviewing merged PRs*.
 
 ## Demo
