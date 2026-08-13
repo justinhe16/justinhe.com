@@ -4,11 +4,9 @@
 
 ## Blog
 
-- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): Personal essay about quitting a tech job to pursue entrepreneurship and self-directed projects.
+- [Leaving Tech to Build Something](https://www.justinhe.com/blog/creating-a-home-on-the-internet): A personal reflection on quitting a stable tech job to pursue entrepreneurial ambitions and self-directed projects.
 
-## Other
+## Projects
 
-- [Claude Surf AI Development Tool](https://www.justinhe.com/projects/project-claude-surf): Opinionated orchestrator for Claude Code that automates software development with composable agents and Linear integration.
-- [Color Theory Fundamentals](https://www.justinhe.com/a): Practice guide explaining color wheels, dimensions, harmony schemes, and perceptual color spaces for design.
-- [History of Martian Ideas](https://www.justinhe.com/b): Two centuries of human imagination about Martians, from canal theories to modern spacecraft discoveries.
-- [The Shipping Container](https://www.justinhe.com/c): How standardized steel containers revolutionized global trade and enabled modern globalization economics.
+- [Claude Surf AI Orchestrator](https://www.justinhe.com/projects/project-claude-surf): AI-powered software development orchestrator integrating Claude with Linear and Git for autonomous task execution
+- [Fantasy IDL Prediction Game](https://www.justinhe.com/projects/project-fantasy-idl): Live dance crew competition prediction game with real-time scoring and leaderboards
